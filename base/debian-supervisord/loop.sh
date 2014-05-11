@@ -1,7 +1,5 @@
 #!/bin/bash
-if [[ $- == *i* ]]; then
-	/usr/bin/supervisord -n
-else
+if tty -s; then
 	/usr/bin/supervisord
 	while(true); do
 		echo "Exit supervisorctl with Ctrl-D. Detach with Ctrl-P + Ctrl-Q."
@@ -9,4 +7,6 @@ else
 		echo "Exit shell with Ctrl-D. Detach with Ctrl-P + Ctrl-Q."
 		/bin/bash
 	done
+else
+	/usr/bin/supervisord -n
 fi
