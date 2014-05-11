@@ -1,8 +1,12 @@
 #!/bin/bash
-/usr/bin/supervisord
-/usr/bin/supervisorctl
-while(true); do
-	echo "Detach with Ctrl-P Ctrl-Q. Dropping to shell."
-	sleep 1
-	/bin/bash
-done
+if [ -z "$PS1" ]; then
+	/usr/bin/supervisord -n
+else
+	/usr/bin/supervisord
+	while(true); do
+		echo "Exit supervisorctl with Ctrl-D. Detach with Ctrl-P + Ctrl-Q."
+		/usr/bin/supervisorctl
+		echo "Exit shell with Ctrl-D. Detach with Ctrl-P + Ctrl-Q."
+		/bin/bash
+	done
+fi
