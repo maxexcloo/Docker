@@ -1,7 +1,7 @@
 #!/bin/bash
 if tty -s; then
 	/usr/bin/supervisord
-	while(true); do
+	while true; do
 		echo "Exit supervisorctl with Ctrl-D. Detach with Ctrl-P + Ctrl-Q."
 		/usr/bin/supervisorctl
 		echo "Exit shell with Ctrl-D. Detach with Ctrl-P + Ctrl-Q."
