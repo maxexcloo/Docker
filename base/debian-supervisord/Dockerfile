@@ -1,5 +1,6 @@
 FROM debian:latest
-MAINTAINER max@excloo.com
+MAINTAINER Max Schaefer <max@excloo.com>
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y openssh-server nano supervisor wget
