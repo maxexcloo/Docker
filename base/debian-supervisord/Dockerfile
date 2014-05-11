@@ -2,7 +2,7 @@ FROM debian:latest
 MAINTAINER max@excloo.com
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install -y openssh-server supervisor
+RUN apt-get install -y openssh-server nano supervisor wget
 RUN mkdir -p /root/.ssh /var/run/sshd /var/log/supervisor
 RUN wget -O /root/.ssh/authorized_keys --no-check-certificate https://raw.githubusercontent.com/maxexcloo/Configuration/master/authorized_keys
 ADD sshd.conf /etc/supervisor/conf.d/sshd.conf
