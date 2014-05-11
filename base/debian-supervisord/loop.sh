@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -z "$PS1" ]; then
+if [[ $- == *i* ]]; then
 	/usr/bin/supervisord -n
 else
 	/usr/bin/supervisord
