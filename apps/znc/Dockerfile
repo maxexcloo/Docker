@@ -1,4 +1,4 @@
-FROM maxexcloo/debian-supervisord:latest
+FROM maxexcloo/debian-supervisord
 MAINTAINER max@excloo.com
 RUN apt-get install -y znc
 ADD znc.conf /etc/supervisor/conf.d/znc.conf
