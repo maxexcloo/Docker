@@ -11,4 +11,4 @@ ADD loop.sh /usr/local/bin/loop
 RUN chmod +x /usr/local/bin/loop
 EXPOSE 22
 VOLUME ["/data"]
-CMD ["/usr/local/bin/loop"]
+ENTRYPOINT ["/usr/local/bin/loop"]
