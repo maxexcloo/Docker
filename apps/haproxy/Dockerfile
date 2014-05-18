@@ -1,7 +1,7 @@
 FROM maxexcloo/debian-supervisord:latest
 MAINTAINER Max Schaefer <max@excloo.com>
 ENV DOCKER_HOST unix:///tmp/docker.sock
-RUN gpg --export bernat@debian.org --keyring /usr/share/keyrings/debian-keyring.gpg --no-default-keyring | apt-key add -
+RUN gpg --no-default-keyring --keyring=/usr/share/keyrings/debian-keyring.gpg --export bernat@debian.org | apt-key add -
 RUN echo "deb http://cdn.debian.net/debian wheezy-backports main" > /etc/apt/sources.list.d/backports.list
 RUN echo "deb http://haproxy.debian.net wheezy-backports main" > /etc/apt/sources.list.d/haproxy.list
 RUN apt-get update
