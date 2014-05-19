@@ -1,5 +1,6 @@
 global
 	maxconn 4096
+	pidfile /var/run/haproxy.pid
 	user haproxy
 	group haproxy
 
@@ -7,51 +8,24 @@ defaults
 	balance roundrobin
 	mode http
 	option forwardfor
-	option httpclose
-	timeout client 50000ms
-	timeout connect 5000ms
-	timeout server 50000ms
+	timeout client 30s
+	timeout connect 30s
+	timeout server 30s
 
 frontend http-in
-	bind *:80
-	acl is_site1 hdr_end(host) -i domain1.se
-	acl is_site2 hdr_end(host) -i domain2.com
-
-	use_backend site1 if is_site1
-	use_backend site2 if is_site2
-
-backend site1
-	server s2 127.0.0.1:49153 maxconn 32
-
-backend site2
-	balance roundrobin
-	server s1 127.0.0.1:2082 maxconn 32
-
-listen admin
-	bind 127.0.0.1:8080
-	stats enable
+	bind :80
+{{range $host, $containers := groupBy $ "Env.VIRTUAL_HOST"}}
+	acl is_{{$host}} hdr_end(host) -i {{$host}}
+	use_backend host_{{$host}} if is_{{$host}}
+{{end}}
 
 {{range $host, $containers := groupBy $ "Env.VIRTUAL_HOST"}}
-	upstream {{$host}} {
-		{{range $index, $value := $containers}}
-			{{with $address := index $value.Addresses 0}}
-				server {{$address.IP}}:{{$address.Port}};
+backend host_{{$host}}
+	{{range $index, $value := $containers}}
+		{{range $address := $value.Addresses}}
+			{{if eq $address.Port "80"}}
+	server {{$host}}_{{$address.HostPort}} {{$value.Gateway}}:{{$address.HostPort}}
 			{{end}}
 		{{end}}
-	}
-
-	server {
-		#ssl_certificate /etc/nginx/certs/demo.pem;
-		#ssl_certificate_key /etc/nginx/certs/demo.key;
-
-		gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
-
-		server_name {{$host}};
-		proxy_buffering off;
-
-		location / {
-			proxy_pass http://{{$host}};
-			include /etc/nginx/proxy_params;
-		}
-	}
+	{{end}}
 {{end}}
