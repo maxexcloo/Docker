@@ -16,15 +16,30 @@ frontend http-in
 	bind :80
 {{range $host, $containers := groupBy $ "Env.VIRTUAL_HOST"}}
 	acl is_{{$host}} hdr_end(host) -i {{$host}}
+{{end}}
+{{range $host, $containers := groupBy $ "Env.VIRTUAL_HOST"}}
 	use_backend host_{{$host}} if is_{{$host}}
 {{end}}
 
 {{range $host, $containers := groupBy $ "Env.VIRTUAL_HOST"}}
 backend host_{{$host}}
 	{{range $index, $value := $containers}}
-		{{range $address := $value.Addresses}}
-			{{if eq $address.Port "80"}}
-	server {{$host}}_{{$address.HostPort}} {{$value.Gateway}}:{{$address.HostPort}}
+		{{$addrLen := len $value.Addresses}}
+		{{if eq $addrLen 1}}
+			{{with $address := index $value.Addresses 0}}
+	server {{$host}}_{{$address.HostPort}} {{$address.IP}}:{{$address.Port}}
+			{{end}}
+		{{else if $value.Env.VIRTUAL_PORT}}
+			{{range $i, $address := $value.Addresses}}
+				{{if eq $address.Port $value.Env.VIRTUAL_PORT}}
+	server {{$host}}_{{$address.HostPort}} {{$address.IP}}:{{$address.Port}}
+				{{end}}
+			{{end}}
+		{{else}}
+			{{range $i, $address := $value.Addresses}}
+				{{if eq $address.Port "80"}}
+	server {{$host}}_{{$address.HostPort}} {{$address.IP}}:{{$address.Port}}
+				{{end}}
 			{{end}}
 		{{end}}
 	{{end}}
