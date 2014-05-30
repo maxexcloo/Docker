@@ -1,9 +1,9 @@
 MARIADB_USER=${MARIADB_USER:-"docker"}
 MARIADB_PASS=${MARIADB_PASS:-"docker"}
 MARIADB_DB=${MARIADB_DB:-""}
-chown -R mysql /data
+chown -R mysql:mysql /data
 if [ ! "$(ls -A /data)" ]; then
-	cp -R /var/lib/mysql/* /data
+	mysql_install_db --datadir=/data --user=mysql
 	mysqld_safe --background --skip-grant-tables
 	while [ ! -e /run/mysqld/mysqld.sock ]; do
 		inotifywait -e create -q /run/mysqld/
