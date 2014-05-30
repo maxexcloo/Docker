@@ -1,4 +1,4 @@
 FROM busybox:latest
 MAINTAINER Max Schaefer <max@excloo.com>
+RUN mkdir /data
 VOLUME /data
-CMD ["/bin/true"]

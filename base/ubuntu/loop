@@ -1,12 +1,12 @@
 #!/bin/bash
+[ -f /config/init ] && bash /config/init
 if tty -s; then
-	/usr/bin/supervisord
+	supervisord
 	while true; do
 		echo "Exit supervisorctl with Ctrl-D. Detach with Ctrl-P + Ctrl-Q."
-		/usr/bin/supervisorctl
+		supervisorctl
 		echo "Exit shell with Ctrl-D. Detach with Ctrl-P + Ctrl-Q."
-		/bin/bash
+		bash
 	done
-else
-	/usr/bin/supervisord -n
 fi
+supervisord -n

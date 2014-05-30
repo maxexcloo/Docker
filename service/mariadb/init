@@ -1,0 +1,16 @@
+#!/bin/bash
+MARIADB_USER=${MARIADB_USER:-"docker"}
+MARIADB_PASS=${MARIADB_PASS:-"docker"}
+MARIADB_DB=${MARIADB_DB:-"docker"}
+if [ ! "$(ls -A /data)" ]; then
+	cp -R /var/lib/mysql/* /data
+	mysqld_safe --background --skip-grant-tables
+	while [[ ! -e /run/mysqld/mysqld.sock ]]; do inotifywait -e create -q /run/mysqld/; done
+	mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'debian-sys-maint'@'localhost' IDENTIFIED BY '$(cat /etc/mysql/debian.cnf | grep -m 1 "password\s*=\s*"| sed 's/^password\s*=\s*//')';"
+	mysql -u root -e "CREATE USER '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PASS';"
+	mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '$MARIADB_USER'@'%' WITH GRANT OPTION;"
+	mysql -u root -e "CREATE DATABASE $MARIADB_DB;"
+	mysqladmin -u root shutdown
+fi
+chown -R mysql /data
+chown root /data/debian*.flag
