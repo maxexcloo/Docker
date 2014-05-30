@@ -11,4 +11,4 @@ ADD supervisord.conf /etc/supervisor/conf.d/sshd.conf
 RUN chmod +x /config/*
 CMD ["/config/loop"]
 EXPOSE 22
-VOLUME ["/config", "/data"]
+VOLUME ["/data"]
