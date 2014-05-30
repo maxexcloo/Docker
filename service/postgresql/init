@@ -4,7 +4,7 @@ POSTGRESQL_DB=${POSTGRESQL_DB:-""}
 chown -R postgres:postgres /data
 if [ ! "$(ls -A /data)" ]; then
 	su postgres -c "/usr/lib/postgresql/9.3/bin/initdb -D /data"
-	su postgres -c "/usr/lib/postgresql/9.3/bin/postgres -D /data" &
+	su postgres -c "/usr/lib/postgresql/9.3/bin/postgres --config-file=/etc/postgresql/9.3/main/postgresql.conf" &
 	while [ ! -e /run/postgresql/9.3-main.pid ]; do
 		inotifywait -e create -q /run/postgresql/
 	done
