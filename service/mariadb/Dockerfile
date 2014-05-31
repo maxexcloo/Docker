@@ -8,6 +8,5 @@ RUN sed -i -e "s/^bind-address/#bind-address/" /etc/mysql/my.cnf
 RUN sed -i -e "s/^datadir.*=.*/datadir = \/data/" /etc/mysql/my.cnf
 RUN sed -i -e "s/^innodb_buffer_pool_size.*=.*/innodb_buffer_pool_size = 128M/" /etc/mysql/my.cnf
 ADD init /config/init
-ADD mysql.sh /etc/profile.d/mysql.sh
 ADD supervisord.conf /etc/supervisor/conf.d/mariadb.conf
 EXPOSE 3306
