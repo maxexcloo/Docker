@@ -1,5 +1,5 @@
 POSTGRESQL_USER=${POSTGRESQL_USER:-"docker"}
-POSTGRESQL_PASS=${POSTGRESQL_PASS:-"docker"}
+POSTGRESQL_PASS=${POSTGRESQL_PASS:-"$(pwgen -B -s 24 1)"}
 POSTGRESQL_DB=${POSTGRESQL_DB:-""}
 chown -R postgres:postgres /data
 if [ ! "$(ls -A /data)" ]; then
@@ -13,4 +13,6 @@ if [ ! "$(ls -A /data)" ]; then
 		su postgres -c "/usr/lib/postgresql/9.3/bin/createdb -O $POSTGRESQL_USER $POSTGRESQL_DB"
 	fi
 	su postgres -c "/usr/lib/postgresql/9.3/bin/pg_ctl -D /data stop"
+	echo "PostgreSQL Username: $POSTGRESQL_USER"
+	echo "PostgreSQL Password: $POSTGRESQL_PASS"
 fi

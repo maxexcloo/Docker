@@ -12,7 +12,7 @@ RUN wget -O /tmp/docker-gen.tar.gz https://www.github.com/jwilder/docker-gen/rel
 RUN tar -C /usr/local/bin -f /tmp/docker-gen.tar.gz -x -z
 ADD docker-gen.conf /etc/docker-gen.conf
 ADD haproxy.cfg /etc/haproxy/haproxy.cfg
-ADD haproxy.tmpl /usr/local/share/haproxy.tmpl
+ADD haproxy.tmpl /config/haproxy.tmpl
 ADD supervisord.conf /etc/supervisor/conf.d/haproxy.conf
 EXPOSE 80
 EXPOSE 443

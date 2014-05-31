@@ -1,5 +1,5 @@
 MARIADB_USER=${MARIADB_USER:-"docker"}
-MARIADB_PASS=${MARIADB_PASS:-"docker"}
+MARIADB_PASS=${MARIADB_PASS:-"$(pwgen -B -s 24 1)"}
 MARIADB_DB=${MARIADB_DB:-""}
 chown -R mysql:mysql /data
 if [ ! "$(ls -A /data)" ]; then
@@ -13,4 +13,6 @@ if [ ! "$(ls -A /data)" ]; then
 		mysql -u $MARIADB_USER -p$MARIADB_PASS -e "CREATE DATABASE $MARIADB_DB;"
 	fi
 	mysqladmin -u $MARIADB_USER -p$MARIADB_PASS shutdown
+	echo "MariaDB Username: $MARIADB_USER"
+	echo "MariaDB Password: $MARIADB_PASS"
 fi
