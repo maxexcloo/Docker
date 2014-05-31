@@ -9,7 +9,7 @@ if [ ! "$(ls -A /data)" ]; then
 		inotifywait -e create -q /run/mysqld/
 	done
 	mysql -u root -e "FLUSH PRIVILEGES; CREATE USER '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PASS'; GRANT ALL PRIVILEGES ON *.* TO '$MARIADB_USER'@'%' WITH GRANT OPTION;"
-	if [ $MARIADB_DB != "" ]; then
+	if [[ $MARIADB_DB != "" ]]; then
 		mysql -u $MARIADB_USER -p$MARIADB_PASS -e "CREATE DATABASE $MARIADB_DB;"
 	fi
 	mysqladmin -u $MARIADB_USER -p$MARIADB_PASS shutdown
