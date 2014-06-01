@@ -7,10 +7,12 @@ global
 defaults
 	balance roundrobin
 	mode http
+	option abortonclose
 	option forwardfor
-	timeout client 30s
-	timeout connect 30s
-	timeout server 30s
+	option http-server-close
+	timeout client 60s
+	timeout connect 60s
+	timeout server 60s
 
 frontend http-in
 	bind :80
