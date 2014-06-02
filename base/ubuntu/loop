@@ -1,5 +1,5 @@
 #!/bin/bash
-for init in /config/init.d/*; do
+for init in /config/init/*; do
 	[ -f "$init" ] && . "$init"
 done
 if tty -s; then
