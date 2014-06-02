@@ -4,9 +4,9 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1BB943DB
 RUN echo "deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/debian/ wheezy main" > /etc/apt/sources.list.d/mariadb.list
 RUN apt-get update
 RUN apt-get install -y mariadb-server
-RUN sed -e -i "s/^bind-address/#bind-address/" /etc/mysql/my.cnf
-RUN sed -e -i "s/^datadir.*=.*/datadir = \/data/" /etc/mysql/my.cnf
-RUN sed -e -i "s/^innodb_buffer_pool_size.*=.*/innodb_buffer_pool_size = 128M/" /etc/mysql/my.cnf
+RUN sed -i -e "s/^bind-address/#bind-address/" /etc/mysql/my.cnf
+RUN sed -i -e "s/^datadir.*=.*/datadir = \/data/" /etc/mysql/my.cnf
+RUN sed -i -e "s/^innodb_buffer_pool_size.*=.*/innodb_buffer_pool_size = 128M/" /etc/mysql/my.cnf
 ADD init /config/
 ADD supervisord.conf /etc/supervisor/conf.d/mariadb.conf
 EXPOSE 3306
