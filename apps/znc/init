@@ -1,4 +1,0 @@
-chown -R znc:znc /data
-if [ ! "$(ls -A /data)" ]; then
-	su znc -c "znc -c -d /data"
-fi

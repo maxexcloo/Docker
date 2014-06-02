@@ -9,7 +9,7 @@ RUN echo "deb http://haproxy.debian.net/ wheezy-backports main" > /etc/apt/sourc
 RUN apt-get update
 RUN apt-get install -t wheezy-backports -y haproxy
 RUN wget -O - https://www.github.com/jwilder/docker-gen/releases/download/${VERSION}/docker-gen-linux-amd64-${VERSION}.tar.gz | tar -C /usr/local/bin -x -z
-ADD docker-gen.conf /etc/
+ADD docker-gen.conf /config/
 ADD haproxy.tmpl /config/
 ADD supervisord.conf /etc/supervisor/conf.d/haproxy.conf
 EXPOSE 80

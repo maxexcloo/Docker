@@ -6,9 +6,9 @@ RUN apt-get update
 RUN apt-get install -y nginx
 RUN rm -rf /etc/nginx/conf.d
 ADD conf.d /etc/nginx/
-ADD init /config/
-ADD nginx.d /etc/nginx/
+ADD init /config/init/01nginx
 ADD nginx.conf /etc/nginx/
+ADD nginx.d /etc/nginx/
 ADD supervisord.conf /etc/supervisor/conf.d/nginx.conf
 EXPOSE 80
 EXPOSE 443
