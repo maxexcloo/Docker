@@ -1,5 +1,7 @@
 #!/bin/bash
-[ -f /config/init ] && bash /config/init
+for init in /config/init.d/*; do
+	[ -f "$init" ] && . "$init"
+done
 if tty -s; then
 	supervisord
 	while true; do
