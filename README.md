@@ -19,6 +19,14 @@ The following commands can be used to deploy some of the services offered by the
 	    	docker run --name="minecraft-data" maxexcloo/data
 			docker run --name="minecraft" --volumes-from="minecraft-data" -e MEMORY=512 -e OP=maxexcloo -e VERSION=1.7.9 -p 25565:25565 -i -t maxexcloo/minecraft
 
+  - **PHPMyAdmin**
+
+    		docker run --name="phpmyadmin" --link mariadb:mariadb -e VIRTUAL_HOST=phpmyadmin.example.com -i -t maxexcloo/phpmyadmin
+
+  - **PHPPgAdmin**
+
+    		docker run --name="phppgadmin" --link postgresql:postgresql -e VIRTUAL_HOST=phppgadmin.example.com -i -t maxexcloo/phppgadmin
+
   - **ZNC**
 
 	   		docker run --name="znc-data" maxexcloo/data
