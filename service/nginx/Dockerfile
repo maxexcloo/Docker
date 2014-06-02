@@ -5,7 +5,7 @@ RUN echo "deb http://www.nginx.org/packages/debian/ wheezy nginx" > /etc/apt/sou
 RUN apt-get update
 RUN apt-get install -y nginx
 RUN rm -rf /etc/nginx/conf.d
-ADD config.d /etc/nginx/
+ADD conf.d /etc/nginx/
 ADD init /config/
 ADD nginx.d /etc/nginx/
 ADD nginx.conf /etc/nginx/
