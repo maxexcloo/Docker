@@ -12,7 +12,8 @@ The following commands can be used to deploy some of the services offered by the
 
   - **HAProxy**
 
-    		docker run --name="haproxy" -p 80:80 -p 443:443 -v /var/run/docker.sock:/tmp/docker.sock -i -t maxexcloo/haproxy
+    		docker run --name="haproxy-config" -v /var/run/docker.sock:/tmp/docker.sock -i -t maxexcloo/haproxy
+    		docker run --name="haproxy" --volumes-from="haproxy-config" -p 80:80 -p 443:443 -i -t maxexcloo/haproxy
 
   - **Minecraft**
 
@@ -36,11 +37,13 @@ The following commands can be used to deploy some of the services offered by the
 
   - **Nginx**
 	
-			docker run --name="nginx-static.example.com" -e VIRTUAL_HOST=static.example.com -i -t maxexcloo/nginx
+		    docker run --name="nginx-data-nginx.example.com" maxexcloo/data
+			docker run --name="nginx-nginx.example.com" --volumes-from="nginx-data-nginx.example.com" -e VIRTUAL_HOST=nginx.example.com -i -t maxexcloo/nginx
 	
   - **Nginx + PHP-FPM**
 	
-			docker run --name="php-php.example.com" -e VIRTUAL_HOST=php.example.com -i -t maxexcloo/nginx-php
+		    docker run --name="php-data-php.example.com" maxexcloo/data
+			docker run --name="php-php.example.com" --volumes-from="php-data-php.example.com" -e VIRTUAL_HOST=php.example.com -i -t maxexcloo/nginx-php
 	
   - **MariaDB** 
 	
