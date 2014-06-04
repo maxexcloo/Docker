@@ -1,6 +1,6 @@
 FROM maxexcloo/nginx-php:latest
 MAINTAINER Max Schaefer <max@excloo.com>
-RUN apt-get install --nodeps -y libjs-jquery phppgadmin
-WORKDIR /data
-RUN rmdir http
-RUN ln -s /usr/share/phppgadmin http
+RUN apt-get download -y libjs-jquery phppgadmin
+RUN dpkg --force-all -i *.deb
+RUN rm *.deb
+RUN ln -s /usr/share/phppgadmin /data/http
