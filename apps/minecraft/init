@@ -7,4 +7,4 @@ if [ ! "$(ls -A /data)" ]; then
 	wget -O /data/minecraft_server.jar https://s3.amazonaws.com/Minecraft.Download/versions/$VERSION/minecraft_server.$VERSION.jar 
 fi
 chown -R minecraft:minecraft /data
-sed -i 's/512/$MEMORY/g' /etc/supervisor/conf.d/minecraft.conf
+sed -i "s/512/$MEMORY/g" /etc/supervisor/conf.d/minecraft.conf

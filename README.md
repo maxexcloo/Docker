@@ -18,7 +18,7 @@ The following commands can be used to deploy some of the services offered by the
   - **Minecraft**
 
 	    	docker run --name="minecraft-data" maxexcloo/data
-			docker run --name="minecraft" --volumes-from="minecraft-data" -e MEMORY=1280 -e OP=maxexcloo -e VERSION=1.7.9 -p 25565:25565 -i -t maxexcloo/minecraft
+			docker run --name="minecraft" --volumes-from="minecraft-data" -e MEMORY=1024 -e OP=maxexcloo -e VERSION=1.7.9 -p 25565:25565 -i -t maxexcloo/minecraft
 
   - **PHPMyAdmin**
 
