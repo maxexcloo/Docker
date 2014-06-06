@@ -5,10 +5,10 @@ RUN echo "deb http://www.nginx.org/packages/debian/ wheezy nginx" > /etc/apt/sou
 RUN apt-get update
 RUN apt-get install -y nginx
 RUN rm -rf /etc/nginx/conf.d
-ADD conf.d /etc/nginx
+ADD conf.d /etc/nginx/conf.d
 ADD init /config/init/01nginx
-ADD nginx.conf /etc/nginx/
-ADD nginx.d /etc/nginx
+ADD nginx.conf /etc/nginx/nginx.conf
+ADD nginx.d /etc/nginx/nginx.d
 ADD supervisord.conf /etc/supervisor/conf.d/nginx.conf
 EXPOSE 80
 EXPOSE 443
