@@ -10,9 +10,12 @@ The following commands can be used to deploy some of the services offered by the
 
     		docker run --name="adminer" --link mariadb:mariadb --link postgresql:postgresql -e VIRTUAL_HOST=adminer.example.com -i -t maxexcloo/adminer
 
-  - **HAProxy**
+  - **HAProxy Config**
 
     		docker run --name="haproxy-config" -v /var/run/docker.sock:/tmp/docker.sock -i -t maxexcloo/haproxy
+
+  - **HAProxy**
+
     		docker run --name="haproxy" --volumes-from="haproxy-config" -p 80:80 -p 443:443 -i -t maxexcloo/haproxy
 
   - **Minecraft**
@@ -27,6 +30,10 @@ The following commands can be used to deploy some of the services offered by the
   - **PHPPgAdmin**
 
     		docker run --name="phppgadmin" --link postgresql:postgresql -e VIRTUAL_HOST=phppgadmin.example.com -i -t maxexcloo/phppgadmin
+
+  - **Tiny Tiny RSS**
+
+    		docker run --name="tiny-tiny-rss" --link postgresql:postgresql -e VIRTUAL_HOST=reader.example.com -i -t maxexcloo/tiny-tiny-rss
 
   - **ZNC**
 
