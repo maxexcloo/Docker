@@ -1,6 +1,6 @@
 #!/bin/bash
 for init in /config/init/*; do
-	[ -f "$init" ] && . "$init"
+	. "$init"
 done
 if tty -s; then
 	supervisord
