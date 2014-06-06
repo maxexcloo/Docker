@@ -1,7 +1,9 @@
 #!/bin/bash
-for init in /config/init/*; do
-	. "$init"
-done
+if [ ! "$(ls -A /config/init)" ]; then
+	for init in /config/init/*; do
+		. "$init"
+	done
+fi
 if tty -s; then
 	supervisord
 	while true; do
