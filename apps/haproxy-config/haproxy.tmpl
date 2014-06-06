@@ -25,9 +25,6 @@ frontend http-in
 	use_backend host_{{$host}} if is_{{$host}}
 {{end}}
 
-frontend https-in
-	bind :443
-
 {{range $host, $containers := groupBy $ "Env.VIRTUAL_HOST"}}
 backend host_{{$host}}
 	{{range $index, $value := $containers}}
