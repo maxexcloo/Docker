@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ ! "$(ls -A /config/init)" ]; then
+if [ "$(ls -A /config/init)" ]; then
 	for init in /config/init/*; do
 		. "$init"
 	done
