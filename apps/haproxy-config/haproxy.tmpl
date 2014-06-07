@@ -10,11 +10,15 @@ defaults
 	option abortonclose
 	option forwardfor
 	option http-server-close
-	stats enable
-	stats uri /haproxy
 	timeout client 60s
 	timeout connect 60s
 	timeout server 60s
+
+listen stats :1936
+	stats enable
+	stats hide-version
+	stats refresh 5s
+	stats uri /
 
 frontend http-in
 	bind :80

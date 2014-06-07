@@ -1,6 +1,4 @@
-MARIADB_USER=${MARIADB_USER:-"docker"}
 MARIADB_PASS=${MARIADB_PASS:-"$(pwgen -B -s 24 1)"}
-MARIADB_DB=${MARIADB_DB:-""}
 chown -R mysql:mysql /data
 if [ ! "$(ls -A /data)" ]; then
 	mysql_install_db --datadir=/data --user=mysql
@@ -9,7 +7,7 @@ if [ ! "$(ls -A /data)" ]; then
 		inotifywait -e create -q /run/mysqld/
 	done
 	mysql -u root -e "FLUSH PRIVILEGES; CREATE USER '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PASS'; GRANT ALL PRIVILEGES ON *.* TO '$MARIADB_USER'@'%' WITH GRANT OPTION;"
-	if [[ $MARIADB_DB != "" ]]; then
+	if [[ $MARIADB_DB != "NONE" ]]; then
 		mysql -u $MARIADB_USER -p$MARIADB_PASS -e "CREATE DATABASE $MARIADB_DB;"
 	fi
 	mysqladmin -u $MARIADB_USER -p$MARIADB_PASS shutdown

@@ -1,5 +1,5 @@
 <?php
-$cfg['blowfish_secret'] = 'RANDOM';
+$cfg['blowfish_secret'] = 'SECRET';
 $cfg['PmaNoRelation_DisableWarning'] = true;
 $i = 0;
 $i++;

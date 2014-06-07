@@ -16,7 +16,7 @@ The following commands can be used to deploy some of the services offered by the
 
   - **HAProxy**
 
-          docker run --name="haproxy" --volumes-from="haproxy-config" -p 80:80 -p 443:443 -i -t maxexcloo/haproxy
+          docker run --name="haproxy" --volumes-from="haproxy-config" -p 80:80 -p 443:443 -p 1936:1936 -i -t maxexcloo/haproxy
 
   - **Minecraft**
 
@@ -33,7 +33,8 @@ The following commands can be used to deploy some of the services offered by the
 
   - **Tiny Tiny RSS**
 
-          docker run --name="tiny-tiny-rss" --link postgresql:postgresql -e VIRTUAL_HOST=reader.example.com -i -t maxexcloo/tiny-tiny-rss
+          docker run --name="tiny-tiny-rss-data" maxexcloo/data
+          docker run --name="tiny-tiny-rss" --link postgresql:postgresql --volumes-from="tiny-tiny-rss-data" -e VIRTUAL_HOST=reader.example.com -i -t maxexcloo/tiny-tiny-rss
 
   - **ZNC**
 

@@ -1,4 +1,3 @@
 cd /data
 mkdir -p conf http logs secure
 chmod 0770 secure
-chown -R www-data:www-data /data

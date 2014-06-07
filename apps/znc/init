@@ -1,0 +1,3 @@
+if [ ! "$(ls -A /data)" ]; then
+	znc --makeconf -d /data
+fi
