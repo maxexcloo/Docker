@@ -5,4 +5,4 @@ ENV VERSION 0.3.0
 RUN wget -O - "https://www.github.com/jwilder/docker-gen/releases/download/${VERSION}/docker-gen-linux-amd64-${VERSION}.tar.gz" | tar --directory=/usr/local/bin -x -z
 ADD haproxy.tmpl /config/data/haproxy.tmpl
 ADD supervisord.conf /etc/supervisor/conf.d/docker-gen.conf
-VOLUME /data/temp
+VOLUME /config/temp
