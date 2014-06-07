@@ -1,6 +1,6 @@
 VIRTUAL_HOST=${VIRTUAL_HOST:-"-"}
-sed -i "s/server _;/server $VIRTUAL_HOST;/g" /etc/nginx/conf.d/default.conf
+sed -i "s/server_name _;/server_name $VIRTUAL_HOST;/g" /etc/nginx/host.d/default.conf
 cd /data
-mkdir conf http logs secure
+mkdir -p conf http logs secure
 chmod 0770 secure
 chown -R www-data:www-data /data
