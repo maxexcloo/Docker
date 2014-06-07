@@ -16,7 +16,8 @@ The following commands can be used to deploy some of the services offered by the
 
   - **HAProxy**
 
-          docker run --name="haproxy" --volumes-from="haproxy-config" -p 80:80 -p 443:443 -p 1936:1936 -i -t maxexcloo/haproxy
+          docker run --name="haproxy-data" maxexcloo/data
+          docker run --name="haproxy" --volumes-from="haproxy-config" --volumes-from="haproxy-data" -p 80:80 -p 443:443 -p 1936:1936 -i -t maxexcloo/haproxy
 
   - **Minecraft**
 
