@@ -8,7 +8,7 @@ The following commands can be used to deploy some of the services offered by the
 
   - **Adminer**
 
-          docker run --name="adminer" --link mariadb:mariadb --link postgresql:postgresql -e VIRTUAL_DIRECTORY=/adminer/ -e VIRTUAL_HOST=adminer.example.com maxexcloo/adminer
+          docker run --name="adminer" --link mariadb:mariadb --link postgresql:postgresql -e VIRTUAL_DIRECTORY=/adminer -e VIRTUAL_HOST=adminer.example.com maxexcloo/adminer
 
   - **HAProxy Config**
 
@@ -26,16 +26,16 @@ The following commands can be used to deploy some of the services offered by the
 
   - **PHPMyAdmin**
 
-          docker run --name="phpmyadmin" --link mariadb:mariadb -e VIRTUAL_DIRECTORY=/phpmyadmin/ -e VIRTUAL_HOST=phpmyadmin.example.com maxexcloo/phpmyadmin
+          docker run --name="phpmyadmin" --link mariadb:mariadb -e VIRTUAL_DIRECTORY=/phpmyadmin -e VIRTUAL_HOST=phpmyadmin.example.com maxexcloo/phpmyadmin
 
   - **PHPPgAdmin**
 
-          docker run --name="phppgadmin" --link postgresql:postgresql -e VIRTUAL_DIRECTORY=/phppgadmin/ -e VIRTUAL_HOST=phppgadmin.example.com maxexcloo/phppgadmin
+          docker run --name="phppgadmin" --link postgresql:postgresql -e VIRTUAL_DIRECTORY=/phppgadmin -e VIRTUAL_HOST=phppgadmin.example.com maxexcloo/phppgadmin
 
   - **Tiny Tiny RSS**
 
           docker run --name="tiny-tiny-rss-data" maxexcloo/data
-          docker run --name="tiny-tiny-rss" --link postgresql:postgresql --volumes-from="tiny-tiny-rss-data" -e VIRTUAL_DIRECTORY=/reader/ -e VIRTUAL_HOST=reader.example.com maxexcloo/tiny-tiny-rss
+          docker run --name="tiny-tiny-rss" --link postgresql:postgresql --volumes-from="tiny-tiny-rss-data" -e VIRTUAL_DIRECTORY=/reader -e VIRTUAL_HOST=reader.example.com maxexcloo/tiny-tiny-rss
 
   - **ZNC**
 
@@ -47,12 +47,12 @@ The following commands can be used to deploy some of the services offered by the
   - **Nginx**
 	
           docker run --name="nginx-data-nginx.example.com" maxexcloo/data
-          docker run --name="nginx-nginx.example.com" -it --volumes-from="nginx-data-nginx.example.com" -e VIRTUAL_DIRECTORY=/nginx/ -e VIRTUAL_HOST=nginx.example.com maxexcloo/nginx
+          docker run --name="nginx-nginx.example.com" -it --volumes-from="nginx-data-nginx.example.com" -e VIRTUAL_DIRECTORY=/nginx -e VIRTUAL_HOST=nginx.example.com maxexcloo/nginx
 	
   - **Nginx + PHP-FPM**
 	
           docker run --name="php-data-php.example.com" maxexcloo/data
-          docker run --name="php-php.example.com" -it --volumes-from="php-data-php.example.com" -e VIRTUAL_DIRECTORY=/php/ -e VIRTUAL_HOST=php.example.com maxexcloo/nginx-php
+          docker run --name="php-php.example.com" -it --volumes-from="php-data-php.example.com" -e VIRTUAL_DIRECTORY=/php -e VIRTUAL_HOST=php.example.com maxexcloo/nginx-php
 	
   - **MariaDB** 
 	
