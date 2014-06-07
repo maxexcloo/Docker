@@ -7,8 +7,8 @@ RUN apt-get install -y nginx
 RUN rm -rf /etc/nginx/*.d
 RUN mkdir -p /etc/nginx/addon.d /etc/nginx/conf.d /etc/nginx/host.d /etc/nginx/nginx.d
 ADD conf.d /etc/nginx/conf.d
-ADD 01init /config/init/01nginx
-ADD 99init /config/init/99nginx
+ADD init01 /config/init/01nginx
+ADD init99 /config/init/99nginx
 ADD host.d /etc/nginx/host.d
 ADD nginx.conf /etc/nginx/nginx.conf
 ADD nginx.d /etc/nginx/nginx.d
