@@ -8,7 +8,7 @@ The following commands can be used to deploy some of the services offered by the
 
   - **Adminer**
 
-          docker run --name="adminer" --link mariadb:mariadb --link postgresql:postgresql -e VIRTUAL_DIRECTORY=/adminer -e VIRTUAL_HOST=adminer.example.com maxexcloo/adminer
+          docker run --name="adminer" -d --link mariadb:mariadb --link postgresql:postgresql -e VIRTUAL_DIRECTORY=/adminer -e VIRTUAL_HOST=adminer.user.ransomit.excloo.net maxexcloo/adminer
 
   - **HAProxy Config**
 
@@ -26,33 +26,61 @@ The following commands can be used to deploy some of the services offered by the
 
   - **PHPMyAdmin**
 
-          docker run --name="phpmyadmin" --link mariadb:mariadb -e VIRTUAL_DIRECTORY=/phpmyadmin -e VIRTUAL_HOST=phpmyadmin.example.com maxexcloo/phpmyadmin
+          docker run --name="phpmyadmin" -d --link mariadb:mariadb -e VIRTUAL_DIRECTORY=/phpmyadmin -e VIRTUAL_HOST=phpmyadmin.user.ransomit.excloo.net maxexcloo/phpmyadmin
 
   - **PHPPgAdmin**
 
-          docker run --name="phppgadmin" --link postgresql:postgresql -e VIRTUAL_DIRECTORY=/phppgadmin -e VIRTUAL_HOST=phppgadmin.example.com maxexcloo/phppgadmin
+          docker run --name="phppgadmin" -d --link postgresql:postgresql -e VIRTUAL_DIRECTORY=/phppgadmin -e VIRTUAL_HOST=phppgadmin.user.ransomit.excloo.net maxexcloo/phppgadmin
 
   - **Tiny Tiny RSS**
 
           docker run --name="tiny-tiny-rss-data" maxexcloo/data
-          docker run --name="tiny-tiny-rss" --link postgresql:postgresql --volumes-from="tiny-tiny-rss-data" -e VIRTUAL_DIRECTORY=/reader -e VIRTUAL_HOST=reader.example.com maxexcloo/tiny-tiny-rss
+          docker run --name="tiny-tiny-rss" -it --link postgresql:postgresql --volumes-from="tiny-tiny-rss-data" -e VIRTUAL_DIRECTORY=/reader -e VIRTUAL_HOST=reader.excloo.com maxexcloo/tiny-tiny-rss
 
   - **ZNC**
 
           docker run --name="znc-data" maxexcloo/data
           docker run --name="znc" -it --volumes-from="znc-data" -p 6667:6667 maxexcloo/znc
 
+- **Base**
+
+  - **Debian**
+
+          docker run --name="debian" -it maxexcloo/debian
+
+  - **Ubuntu**
+
+          docker run --name="debian" -it maxexcloo/ubuntu
+
+  - **Java**
+
+          docker run --name="java" -it maxexcloo/java
+
+  - **OpenSSH**
+
+          docker run --name="openssh" -it maxexcloo/openssh
+
+- **Deploy**
+
+  - **Debian**
+
+          docker run -it --rm=true --volumes-from="" maxexcloo/debian
+
+  - **Ubuntu**
+
+          docker run -it --rm=true --volumes-from="" maxexcloo/ubuntu
+
 - **Services**
 
   - **Nginx**
 	
-          docker run --name="nginx-data-nginx.example.com" maxexcloo/data
-          docker run --name="nginx-nginx.example.com" -it --volumes-from="nginx-data-nginx.example.com" -e VIRTUAL_DIRECTORY=/nginx -e VIRTUAL_HOST=nginx.example.com maxexcloo/nginx
+          docker run --name="nginx-data" maxexcloo/data
+          docker run --name="nginx" -it --volumes-from="nginx-data" -e VIRTUAL_DIRECTORY=/nginx -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx
 	
   - **Nginx + PHP-FPM**
 	
-          docker run --name="php-data-php.example.com" maxexcloo/data
-          docker run --name="php-php.example.com" -it --volumes-from="php-data-php.example.com" -e VIRTUAL_DIRECTORY=/php -e VIRTUAL_HOST=php.example.com maxexcloo/nginx-php
+          docker run --name="php-data" maxexcloo/data
+          docker run --name="php" -it --volumes-from="php-data" -e VIRTUAL_DIRECTORY=/php -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx-php
 	
   - **MariaDB** 
 	
