@@ -12,7 +12,7 @@ The following commands can be used to deploy some of the services offered by the
 
   - **HAProxy Config**
 
-          docker run --name="haproxy-config" -it -e DOMAIN=excloo.com,www.excloo.com -e HOSTNAME=$(hostname) -v /var/run/docker.sock:/tmp/docker.sock maxexcloo/haproxy-config
+          docker run --name="haproxy-config" -it -v /var/run/docker.sock:/tmp/docker.sock maxexcloo/haproxy-config
 
   - **HAProxy**
 
