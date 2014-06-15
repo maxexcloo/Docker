@@ -2,7 +2,7 @@ FROM maxexcloo/debian:latest
 MAINTAINER Max Schaefer <max@excloo.com>
 ENV MARIADB_USER docker
 ENV MARIADB_DB NONE
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1BB943DB
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CBCB082A1BB943DB
 RUN echo "deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/debian/ wheezy main" > /etc/apt/sources.list.d/mariadb.list
 RUN apt-get update
 RUN apt-get install -y mariadb-server
