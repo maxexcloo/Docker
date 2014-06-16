@@ -38,18 +38,18 @@ backend http_{{$host}}
 		{{$addrLen := len $value.Addresses}}
 		{{if eq $addrLen 1}}
 			{{with $address := index $value.Addresses 0}}
-	server {{$address.IP}}:{{$address.Port}} {{$address.IP}}:{{$address.Port}}
+	server {{$address.IP}}:{{$address.Port}} {{$address.IP}}:{{$address.Port}} check
 			{{end}}
 		{{else if $value.Env.VIRTUAL_PORT}}
 			{{range $i, $address := $value.Addresses}}
 				{{if eq $address.Port $value.Env.VIRTUAL_PORT}}
-	server {{$address.IP}}:{{$address.Port}} {{$address.IP}}:{{$address.Port}}
+	server {{$address.IP}}:{{$address.Port}} {{$address.IP}}:{{$address.Port}} check
 				{{end}}
 			{{end}}
 		{{else}}
 			{{range $i, $address := $value.Addresses}}
 				{{if eq $address.Port "80"}}
-	server {{$address.IP}}:{{$address.Port}} {{$address.IP}}:{{$address.Port}}
+	server {{$address.IP}}:{{$address.Port}} {{$address.IP}}:{{$address.Port}} check
 				{{end}}
 			{{end}}
 		{{end}}
