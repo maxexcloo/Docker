@@ -17,8 +17,7 @@ defaults
 frontend http-in
 	bind :80
 {{range $host, $containers := groupByMulti $ "Env.VIRTUAL_HOST" ","}}
-	acl host_{{$host}} hdr(host) -i {{$host}}
-	use_backend http_{{$host}} if host_{{$host}}
+	use_backend http_{{$host}} if { hdr(host) -i {{$host}} }
 {{end}}
 
 frontend https-in
