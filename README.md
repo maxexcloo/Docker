@@ -52,14 +52,6 @@ The following commands can be used to deploy some of the services offered by the
 
           docker run --name="debian" -it maxexcloo/ubuntu
 
-  - **Java**
-
-          docker run --name="java" -it maxexcloo/java
-
-  - **OpenSSH**
-
-          docker run --name="openssh" -it maxexcloo/openssh
-
 - **Deploy**
 
   - **Debian**
