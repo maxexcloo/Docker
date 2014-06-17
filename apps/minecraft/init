@@ -1,4 +1,4 @@
+chown -R minecraft:minecraft /data
 sed -i "s/1024/${MEMORY}/g" /etc/supervisor/conf.d/minecraft.conf
 cd /data
-wget -O minecraft_server.jar "https://s3.amazonaws.com/Minecraft.Download/versions/${VERSION}/minecraft_server.${VERSION}.jar" 
-chown -R minecraft:minecraft .
+su minecraft -c "wget -O minecraft_server.jar https://s3.amazonaws.com/Minecraft.Download/versions/${VERSION}/minecraft_server.${VERSION}.jar"

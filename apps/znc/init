@@ -1,3 +1,4 @@
+chmod -R znc:znc /data
 if [ ! "$(ls -A /data)" ]; then
-	znc --makeconf -d /data
+	su znc -c "znc --makeconf -d /data"
 fi
