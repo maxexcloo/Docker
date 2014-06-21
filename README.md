@@ -43,6 +43,10 @@ The following commands can be used to deploy some of the services offered by the
           docker run --name="znc-data" maxexcloo/data
           docker run --name="znc" -it --volumes-from="znc-data" -e VIRTUAL_HOST=irc.excloo.com -e VIRTUAL_PORT=6667 -p 6697:6697 -p 6667:6667 maxexcloo/znc
 
+  - **WebIRC**
+
+          docker run --name="webirc" -it -e VIRTUAL_HOST=chat.excloo.com -e VIRTUAL_PORT=8080 -p 8080:8080 maxexcloo/znc
+
 - **Services**
 
   - **Nginx**
