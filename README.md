@@ -10,12 +10,13 @@ The following commands can be used to deploy some of the services offered by the
 
           docker run --name="adminer" -d --link mariadb:mariadb --link postgresql:postgresql -e VIRTUAL_DIRECTORY=/adminer -e VIRTUAL_HOST=adminer.user.ransomit.excloo.net maxexcloo/adminer
 
-  - **HAProxy Config**
+  - **DNS Tunnel**
 
-          docker run --name="haproxy-config" -it -v /var/run/docker.sock:/tmp/docker.sock maxexcloo/haproxy-config
+          docker run --name="dns-tunnel" -it -e CONFIG=https://gist.github.com/maxexcloo/ -p 53:53 -p 80:80 -p 443:443 maxexcloo/dns-tunnel
 
   - **HAProxy**
 
+          docker run --name="haproxy-config" -it -v /var/run/docker.sock:/tmp/docker.sock maxexcloo/haproxy-config
           docker run --name="haproxy-data" maxexcloo/data
           docker run --name="haproxy" -it --volumes-from="haproxy-config" --volumes-from="haproxy-data" -p 80:80 -p 443:443 -p 1936:1936 maxexcloo/haproxy
 
