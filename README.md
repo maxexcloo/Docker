@@ -41,7 +41,7 @@ The following commands can be used to deploy some of the services offered by the
   - **ZNC**
 
           docker run --name="znc-data" maxexcloo/data
-          docker run --name="znc" -it --volumes-from="znc-data" -e VIRTUAL_DIRECTORY=/irc -e VIRTUAL_HOST=irc.excloo.com -p 6697:6697 maxexcloo/znc
+          docker run --name="znc" -it --volumes-from="znc-data" -e VIRTUAL_DIRECTORY=/irc -e VIRTUAL_HOST=irc.excloo.com -e VIRTUAL_PORT=8080 -p 6697:6697 -p 8080 maxexcloo/znc
 
 - **Base**
 
