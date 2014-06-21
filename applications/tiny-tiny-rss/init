@@ -1,6 +1,6 @@
 if [ ! "$(ls -A /data/http)" ]; then
-	cp /config/data/* /data/conf
-	cd /data/http
-	wget -O - "https://www.github.com/gothfox/Tiny-Tiny-RSS/archive/${VERSION}.tar.gz" | tar --strip-components=1 -x -z Tiny-Tiny-RSS-${VERSION}
-	rm -rf *.md *.pot */*/.empty */.empty .buildpath .gitignore .htaccess .project LICENSE utils
+	wget -O - "https://www.github.com/gothfox/Tiny-Tiny-RSS/archive/${VERSION}.tar.gz" | tar --strip-components=1 -C /data/http -x -z Tiny-Tiny-RSS-${VERSION}
+	rm -rf /data/http/*.md /data/http/*.pot /data/http/*/*/.empty /data/http/*/.empty /data/http/.buildpath /data/http/.gitignore /data/http/.htaccess /data/http/.project /data/http/LICENSE /data/http/utils
+	cp /config/data/*.conf /data/conf
+	cp -R /config/data/custom_keys /data/http/plugins
 fi

@@ -10,27 +10,21 @@ defaults
 	option abortonclose
 	option forwardfor
 	option http-server-close
+	stats enable
+	stats hide-version
+	stats refresh 5s
+	stats uri /haproxy
 	timeout client 60s
 	timeout connect 60s
 	timeout server 60s
 
-frontend http-in
+frontend http
 	bind :80
-{{range $host, $containers := groupByMulti $ "Env.VIRTUAL_HOST" ","}}
-	use_backend http_{{$host}} if { hdr(host) -i {{$host}} }
-{{end}}
-
-frontend https-in
 	bind :443 ssl crt /data/ ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:ECDHE-RSA-DES-CBC3-SHA:ECDHE-ECDSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:EDH-DSS-DES-CBC3-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK
 {{range $host, $containers := groupByMulti $ "Env.VIRTUAL_HOST" ","}}
+	use_backend http_{{$host}} if { hdr(host) -i {{$host}} }
 	use_backend http_{{$host}} if { ssl_fc_sni {{$host}} }
 {{end}}
-
-listen stats :1936
-	stats enable
-	stats hide-version
-	stats refresh 5s
-	stats uri /
 
 {{range $host, $containers := groupByMulti $ "Env.VIRTUAL_HOST" ","}}
 backend http_{{$host}}

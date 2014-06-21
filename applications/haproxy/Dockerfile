@@ -9,4 +9,3 @@ RUN apt-get install -t wheezy-backports -y haproxy
 ADD supervisord.conf /etc/supervisor/conf.d/haproxy.conf
 EXPOSE 80
 EXPOSE 443
-EXPOSE 1936

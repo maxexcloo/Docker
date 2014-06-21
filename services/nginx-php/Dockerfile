@@ -9,4 +9,3 @@ RUN mkdir -p /etc/nginx/addon.d /etc/php5/fpm/pool.d
 ADD fpm /etc/php5/fpm
 ADD nginx /etc/nginx
 ADD supervisord.conf /etc/supervisor/conf.d/php-fpm.conf
-EXPOSE 80

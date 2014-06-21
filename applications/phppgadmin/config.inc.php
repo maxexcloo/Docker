@@ -6,7 +6,6 @@ $conf['servers'][0]['sslmode'] = 'allow';
 $conf['servers'][0]['defaultdb'] = 'postgres';
 $conf['servers'][0]['pg_dump_path'] = '/usr/bin/pg_dump';
 $conf['servers'][0]['pg_dumpall_path'] = '/usr/bin/pg_dumpall';
-
 $conf['default_lang'] = 'auto';
 $conf['autocomplete'] = 'default on';
 $conf['extra_login_security'] = true;
@@ -25,4 +24,3 @@ $conf['help_base'] = 'http://www.postgresql.org/docs/%s/interactive/';
 $conf['ajax_refresh'] = 3;
 $conf['plugins'] = array();
 $conf['version'] = 19;
-?>

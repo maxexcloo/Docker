@@ -8,7 +8,7 @@ The following commands can be used to deploy some of the services offered by the
 
   - **Adminer**
 
-          docker run --name="adminer" -d --link mariadb:mariadb --link postgresql:postgresql -e VIRTUAL_DIRECTORY=/adminer -e VIRTUAL_HOST=adminer.user.ransomit.excloo.net maxexcloo/adminer
+          docker run --name="adminer" -d --link mariadb:mariadb --link postgresql:postgresql -e VIRTUAL_HOST=adminer.user.ransomit.excloo.net maxexcloo/adminer
 
   - **DNS Tunnel**
 
@@ -18,7 +18,7 @@ The following commands can be used to deploy some of the services offered by the
 
           docker run --name="haproxy-config" -it -v /var/run/docker.sock:/tmp/docker.sock maxexcloo/haproxy-config
           docker run --name="haproxy-data" maxexcloo/data
-          docker run --name="haproxy" -it --volumes-from="haproxy-config" --volumes-from="haproxy-data" -p 80:80 -p 443:443 -p 1936:1936 maxexcloo/haproxy
+          docker run --name="haproxy" -it --volumes-from="haproxy-config" --volumes-from="haproxy-data" -p 80:80 -p 443:443 maxexcloo/haproxy
 
   - **Minecraft**
 
@@ -27,53 +27,33 @@ The following commands can be used to deploy some of the services offered by the
 
   - **PHPMyAdmin**
 
-          docker run --name="phpmyadmin" -d --link mariadb:mariadb -e VIRTUAL_DIRECTORY=/phpmyadmin -e VIRTUAL_HOST=phpmyadmin.user.ransomit.excloo.net maxexcloo/phpmyadmin
+          docker run --name="phpmyadmin" -d --link mariadb:mariadb -e VIRTUAL_HOST=phpmyadmin.user.ransomit.excloo.net maxexcloo/phpmyadmin
 
   - **PHPPgAdmin**
 
-          docker run --name="phppgadmin" -d --link postgresql:postgresql -e VIRTUAL_DIRECTORY=/phppgadmin -e VIRTUAL_HOST=phppgadmin.user.ransomit.excloo.net maxexcloo/phppgadmin
+          docker run --name="phppgadmin" -d --link postgresql:postgresql -e VIRTUAL_HOST=phppgadmin.user.ransomit.excloo.net maxexcloo/phppgadmin
 
   - **Tiny Tiny RSS**
 
           docker run --name="tiny-tiny-rss-data" maxexcloo/data
-          docker run --name="tiny-tiny-rss" -it --link postgresql:postgresql --volumes-from="tiny-tiny-rss-data" -e VIRTUAL_DIRECTORY=/reader -e VIRTUAL_HOST=reader.excloo.com maxexcloo/tiny-tiny-rss
+          docker run --name="tiny-tiny-rss" -it --link postgresql:postgresql --volumes-from="tiny-tiny-rss-data" -e VIRTUAL_HOST=reader.excloo.com maxexcloo/tiny-tiny-rss
 
   - **ZNC**
 
           docker run --name="znc-data" maxexcloo/data
-          docker run --name="znc" -it --volumes-from="znc-data" -e VIRTUAL_DIRECTORY=/irc -e VIRTUAL_HOST=irc.excloo.com -e VIRTUAL_PORT=8080 -p 6697:6697 -p 8080 maxexcloo/znc
-
-- **Base**
-
-  - **Debian**
-
-          docker run --name="debian" -it maxexcloo/debian
-
-  - **Ubuntu**
-
-          docker run --name="debian" -it maxexcloo/ubuntu
-
-- **Deploy**
-
-  - **Debian**
-
-          docker run -it --rm=true --volumes-from="" maxexcloo/debian
-
-  - **Ubuntu**
-
-          docker run -it --rm=true --volumes-from="" maxexcloo/ubuntu
+          docker run --name="znc" -it --volumes-from="znc-data" -e VIRTUAL_HOST=irc.excloo.com -e VIRTUAL_PORT=6667 -p 6697:6697 -p 6667:6667 maxexcloo/znc
 
 - **Services**
 
   - **Nginx**
 	
           docker run --name="nginx-data" maxexcloo/data
-          docker run --name="nginx" -it --volumes-from="nginx-data" -e VIRTUAL_DIRECTORY=/nginx -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx
+          docker run --name="nginx" -it --volumes-from="nginx-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx
 	
   - **Nginx + PHP-FPM**
 	
           docker run --name="php-data" maxexcloo/data
-          docker run --name="php" -it --volumes-from="php-data" -e VIRTUAL_DIRECTORY=/php -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx-php
+          docker run --name="php" -it --volumes-from="php-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx-php
 	
   - **MariaDB** 
 	
