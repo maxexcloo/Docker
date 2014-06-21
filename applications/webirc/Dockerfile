@@ -1,7 +1,7 @@
 FROM maxexcloo/nodejs:latest
 MAINTAINER Max Schaefer <max@excloo.com>
 RUN useradd -m webirc
-RUN git clone git@github.com:pavben/WebIRC.git /data
+RUN git clone https://www.github.com/pavben/WebIRC.git /data
 RUN rm /data/*.example
 RUN cd /data && npm install
 ADD config.json /data/config.json
