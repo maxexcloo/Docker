@@ -45,7 +45,7 @@ The following commands can be used to deploy some of the services offered by the
 
   - **WebIRC**
 
-          docker run --name="webirc" -it -e VIRTUAL_HOST=chat.excloo.com -e VIRTUAL_PORT=8080 -p 8080:8080 maxexcloo/webirc
+          docker run --name="webirc" -it --link znc:znc -e VIRTUAL_HOST=chat.excloo.com -e VIRTUAL_PORT=8080 -p 8080:8080 maxexcloo/webirc
 
 - **Services**
 
