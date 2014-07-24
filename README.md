@@ -25,7 +25,7 @@ The following commands can be used to deploy some of the services offered by the
 
           docker run --name="adminer" -d --link mariadb:mariadb --link postgresql:postgresql -e VIRTUAL_HOST=adminer.example.com maxexcloo/adminer
 
-  - **DNSMasq**
+  - **dnsmasq**
 
           docker run --name="dnsmasq-data" maxexcloo/data
           docker run --name="dnsmasq" -it --volumes-from="dnsmasq-data" -p 53:53 maxexcloo/dnsmasq
@@ -41,15 +41,15 @@ The following commands can be used to deploy some of the services offered by the
           docker run --name="minecraft-data" maxexcloo/data
           docker run --name="minecraft" -it --volumes-from="minecraft-data" -e MEMORY=1024 -p 25565:25565 maxexcloo/minecraft
 
-  - **PHPMyAdmin**
+  - **phpMyAdmin**
 
           docker run --name="phpmyadmin" -d --link mariadb:mariadb -e VIRTUAL_HOST=phpmyadmin.example.com maxexcloo/phpmyadmin
 
-  - **PHPPgAdmin**
+  - **phpPgAdmin**
 
           docker run --name="phppgadmin" -d --link postgresql:postgresql -e VIRTUAL_HOST=phppgadmin.example.com maxexcloo/phppgadmin
 
-  - **SNIProxy**
+  - **SNI Proxy**
 
           docker run --name="sniproxy-data" maxexcloo/data
           docker run --name="sniproxy" -it --volumes-from="sniproxy-data" -p 80:80 -p 443:443 maxexcloo/sniproxy
@@ -70,12 +70,12 @@ The following commands can be used to deploy some of the services offered by the
 
 - **Services**
 
-  - **Nginx**
+  - **nginx**
 	
           docker run --name="nginx-data" maxexcloo/data
           docker run --name="nginx" -it --volumes-from="nginx-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx
 	
-  - **Nginx + PHP-FPM**
+  - **nginx + PHP-FPM**
 	
           docker run --name="php-data" maxexcloo/data
           docker run --name="php" -it --volumes-from="php-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx-php
