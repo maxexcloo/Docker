@@ -9,6 +9,7 @@ RUN tar xfz udns_*.orig.tar.gz; cd udns-*; tar xfz ../udns_*-1.debian.tar.gz; dp
 RUN dpkg -i libudns-dev_*.deb libudns0_*.deb
 RUN tar xfz ${SNIPROXY_VERSION}.tar.gz; cd sniproxy-*; dpkg-buildpackage
 RUN dpkg -i sniproxy_*.deb
+ADD init /config/init/04sniproxy
 ADD sniproxy.conf /data/sniproxy/sniproxy.conf
 ADD supervisord.conf /etc/supervisor/conf.d/sniproxy.conf
 EXPOSE 80
