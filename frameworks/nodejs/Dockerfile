@@ -1,4 +1,4 @@
-FROM maxexcloo/build:latest
+FROM maxexcloo/debian:latest
 MAINTAINER Max Schaefer <max@excloo.com>
 ENV VERSION v0.10.29
 RUN mkdir -p /opt/nodejs
