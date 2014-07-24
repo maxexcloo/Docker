@@ -25,10 +25,10 @@ The following commands can be used to deploy some of the services offered by the
 
           docker run --name="adminer" -d --link mariadb:mariadb --link postgresql:postgresql -e VIRTUAL_HOST=adminer.example.com maxexcloo/adminer
 
-  - **dnsmasq**
+  - **Dnsmasq**
 
           docker run --name="dnsmasq-data" maxexcloo/data
-          docker run --name="dnsmasq" -it --volumes-from="dnsmasq-data" -p 53:53 maxexcloo/dnsmasq
+          docker run --name="dnsmasq" -it --privileged --volumes-from="dnsmasq-data" -p 53:53 maxexcloo/dnsmasq
 
   - **HAProxy**
 
