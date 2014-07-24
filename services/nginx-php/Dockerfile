@@ -6,6 +6,6 @@ RUN apt-get update
 RUN apt-get install -y php5-cli php5-curl php5-fpm php5-gd php5-mcrypt php5-mysql php5-pgsql php5-sqlite
 RUN rm -rf /etc/nginx/addon.d /etc/php5/fpm/pool.d
 RUN mkdir -p /etc/nginx/addon.d /etc/php5/fpm/pool.d
-ADD fpm /etc/php5/fpm
 ADD nginx /etc/nginx
+ADD php5 /etc/php5
 ADD supervisord.conf /etc/supervisor/conf.d/php-fpm.conf
