@@ -28,7 +28,7 @@ The following commands can be used to deploy some of the services offered by the
   - **Dnsmasq**
 
           docker run --name="dnsmasq-data" maxexcloo/data
-          docker run --name="dnsmasq" -it --privileged --volumes-from="dnsmasq-data" -p 53:53 maxexcloo/dnsmasq
+          docker run --name="dnsmasq" -it --privileged --volumes-from="dnsmasq-data" -p 53:53 -p 53:53/udp maxexcloo/dnsmasq
 
   - **HAProxy**
 
