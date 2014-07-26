@@ -1,2 +1,0 @@
-mkdir -p /data/sniproxy
-touch /data/sniproxy/sniproxy.conf

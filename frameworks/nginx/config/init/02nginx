@@ -1,0 +1,2 @@
+mkdir -p /data/config /data/http /data/logs /data/secure
+chmod 0770 /data/secure

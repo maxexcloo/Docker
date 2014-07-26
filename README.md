@@ -16,6 +16,9 @@ Nginx and Nginx + PHP-FPM have a simple directory structure that can be used to 
         /secure
             filename.ext // private files such as passwords or keys
 
+**Instructions**  
+Instructions will be here when I get around to writing them!
+
 **Usage**  
 The following commands can be used to deploy some of the services offered by the Docker containers in this repository.
 
@@ -25,21 +28,10 @@ The following commands can be used to deploy some of the services offered by the
 
           docker run --name="adminer" -d --link mariadb:mariadb --link postgresql:postgresql -e VIRTUAL_HOST=adminer.example.com maxexcloo/adminer
 
-  - **Dnsmasq**
+  - **Koken**
 
-          docker run --name="dnsmasq-data" maxexcloo/data
-          docker run --name="dnsmasq" -it --privileged --volumes-from="dnsmasq-data" -p 53:53 -p 53:53/udp maxexcloo/dnsmasq
-
-  - **HAProxy**
-
-          docker run --name="haproxy-data" maxexcloo/data
-          docker run --name="haproxy-config" -it -v /var/run/docker.sock:/tmp/docker.sock maxexcloo/haproxy-config
-          docker run --name="haproxy" -it --volumes-from="haproxy-config" --volumes-from="haproxy-data" -p 80:80 -p 443:443 maxexcloo/haproxy
-
-  - **Minecraft**
-
-          docker run --name="minecraft-data" maxexcloo/data
-          docker run --name="minecraft" -it --volumes-from="minecraft-data" -e MEMORY=1024 -p 25565:25565 maxexcloo/minecraft
+          docker run --name="koken-data" maxexcloo/data
+          docker run --name="koken" -it --link mariadb:mariadb --volumes-from="koken-data" -e VIRTUAL_HOST=koken.example.com maxexcloo/koken
 
   - **phpMyAdmin**
 
@@ -49,43 +41,80 @@ The following commands can be used to deploy some of the services offered by the
 
           docker run --name="phppgadmin" -d --link postgresql:postgresql -e VIRTUAL_HOST=phppgadmin.example.com maxexcloo/phppgadmin
 
-  - **SNI Proxy**
-
-          docker run --name="sniproxy-data" maxexcloo/data
-          docker run --name="sniproxy" -it --volumes-from="sniproxy-data" -p 80:80 -p 443:443 maxexcloo/sniproxy
-
   - **Tiny Tiny RSS**
 
           docker run --name="tiny-tiny-rss-data" maxexcloo/data
           docker run --name="tiny-tiny-rss" -it --link postgresql:postgresql --volumes-from="tiny-tiny-rss-data" -e VIRTUAL_HOST=tiny-tiny-rss.example.com maxexcloo/tiny-tiny-rss
 
-  - **ZNC**
-
-          docker run --name="znc-data" maxexcloo/data
-          docker run --name="znc" -it --volumes-from="znc-data" -e VIRTUAL_HOST=znc.example.com -e VIRTUAL_PORT=6667 -p 6697:6697 -p 6667:6667 maxexcloo/znc
-
   - **WebIRC**
 
           docker run --name="webirc" -it --link znc:znc -e VIRTUAL_HOST=webirc.example.com -e VIRTUAL_PORT=8080 -p 8080:8080 maxexcloo/webirc
 
-- **Services**
+  - **Wordpress**
 
-  - **nginx**
-	
+          docker run --name="wordpress-data" maxexcloo/data
+          docker run --name="wordpress" -it --link mariadb:mariadb --volumes-from="wordpress-data" -e VIRTUAL_HOST=wordpress.example.com maxexcloo/wordpress
+
+- **Frameworks**
+
+  - **Apache**
+
+          docker run --name="apache-data" maxexcloo/data
+          docker run --name="apache" -it --volumes-from="apache-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/apache
+
+  - **Apache + PHP**
+
+          docker run --name="apache-php-data" maxexcloo/data
+          docker run --name="apache-php" -it --volumes-from="apache-php-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/apache-php
+
+  - **Nginx**
+
           docker run --name="nginx-data" maxexcloo/data
           docker run --name="nginx" -it --volumes-from="nginx-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx
-	
-  - **nginx + PHP-FPM**
-	
-          docker run --name="php-data" maxexcloo/data
-          docker run --name="php" -it --volumes-from="php-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx-php
-	
+
+  - **Nginx + PHP-FPM**
+
+          docker run --name="nginx-php-data" maxexcloo/data
+          docker run --name="nginx-php" -it --volumes-from="nginx-php-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx-php
+
+- **Services**
+
+  - **Dnsmasq**
+
+          docker run --name="dnsmasq-data" maxexcloo/data
+          docker run --name="dnsmasq" -it --privileged --volumes-from="dnsmasq-data" -p 53:53 -p 53:53/udp maxexcloo/dnsmasq
+
+  - **HAProxy**
+
+          docker run --name="haproxy-data" maxexcloo/data
+          docker run --name="haproxy" -it --volumes-from="haproxy-data" -p 80:80 -p 443:443 maxexcloo/haproxy
+
+  - **HAProxy Config**
+
+          docker run --name="haproxy-data" maxexcloo/data
+          docker run --name="haproxy-config" -it --volumes-from="haproxy-data" -v /var/run/docker.sock:/var/run/docker.sock maxexcloo/haproxy-config
+
   - **MariaDB** 
-	
+
           docker run --name="mariadb-data" maxexcloo/data
           docker run --name="mariadb" -it --volumes-from="mariadb-data" maxexcloo/mariadb
-	
+
+  - **Minecraft**
+
+          docker run --name="minecraft-data" maxexcloo/data
+          docker run --name="minecraft" -it --volumes-from="minecraft-data" -e MEMORY=1024 -p 25565:25565 maxexcloo/minecraft
+
   - **PostgreSQL**
-	
+
           docker run --name="postgresql-data" maxexcloo/data
           docker run --name="postgresql" -it --volumes-from="postgresql-data" maxexcloo/postgresql
+
+  - **SNIProxy**
+
+          docker run --name="sniproxy-data" maxexcloo/data
+          docker run --name="sniproxy" -it --volumes-from="sniproxy-data" -p 80:80 -p 443:443 maxexcloo/sniproxy
+
+  - **ZNC**
+
+          docker run --name="znc-data" maxexcloo/data
+          docker run --name="znc" -it --volumes-from="znc-data" -e VIRTUAL_HOST=znc.example.com -e VIRTUAL_PORT=6667 -p 6697:6697 -p 6667:6667 maxexcloo/znc
