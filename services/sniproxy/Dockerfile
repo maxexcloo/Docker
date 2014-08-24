@@ -1,6 +1,6 @@
 FROM maxexcloo/debian:latest
 MAINTAINER Max Schaefer <max@excloo.com>
-ENV SNIPROXY_VERSION 0.3.4
+ENV SNIPROXY_VERSION 0.3.5
 ENV UDNS_VERSION 0.4
 RUN apt-get install -y autotools-dev cdbs debhelper dh-autoreconf dpkg-dev libev-dev libpcre3-dev pkg-config
 WORKDIR /tmp
