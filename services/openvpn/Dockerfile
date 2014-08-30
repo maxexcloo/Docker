@@ -3,4 +3,7 @@ MAINTAINER Max Schaefer <max@excloo.com>
 
 ADD init /config/init/03openvpn
 ADD supervisord.conf /etc/supervisor/conf.d/openvpn.conf
+EXPOSE 110
+EXPOSE 443
 EXPOSE 1194
+EXPOSE 8080

@@ -1,5 +1,1 @@
 chown -R znc:znc /data
-chmod 770 /data
-if [ ! "$(ls -A /data)" ]; then
-	su znc -c "znc --makeconf -d /data"
-fi

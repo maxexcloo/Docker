@@ -102,11 +102,6 @@ The following commands can be used to deploy some of the services offered by the
 
 - **Services**
 
-  - **Bukkit**
-
-          docker run --name="bukkit-data" maxexcloo/data
-          docker run --name="bukkit" -it --volumes-from="bukkit-data" -e MEMORY=1024 -p 25565:25565 maxexcloo/bukkit
-
   - **Dnsmasq**
 
           docker run --name="dnsmasq-data" maxexcloo/data
