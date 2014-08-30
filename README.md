@@ -68,7 +68,7 @@ The following commands can be used to deploy some of the services offered by the
 
   - **Data**
 
-          docker run --name="data" -it maxexcloo/data /bin/bash
+          docker run --name="data" -it maxexcloo/data /bin/sh
 
   - **Debian**
 
