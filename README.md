@@ -1,7 +1,7 @@
-**Description**
+**Description**  
 This repository contains a collection of Docker configurations I've put together to meet my needs.
 
-**Directory Structure**
+**Directory Structure**  
 Nginx and Nginx + PHP-FPM have a simple directory structure that can be used to simply and easily deploy web applications using a volume binding on /data.
 
     /data
@@ -16,10 +16,10 @@ Nginx and Nginx + PHP-FPM have a simple directory structure that can be used to 
         /secure
             filename.ext // private files such as passwords or keys
 
-**Instructions**
+**Instructions**  
 Instructions will be here when I get around to writing them!
 
-**Usage**
+**Usage**  
 The following commands can be used to deploy some of the services offered by the Docker containers in this repository.
 
 - **Applications**
