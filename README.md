@@ -135,7 +135,7 @@ The following commands can be used to deploy some of the services offered by the
   - **SNIProxy**
 
           docker run --name="sniproxy-data" maxexcloo/data
-          docker run --name="sniproxy" -it --volumes-from="sniproxy-data" -p 80:80 -p 443:443 maxexcloo/sniproxy
+          docker run --name="sniproxy" -it --privileged --volumes-from="sniproxy-data" -p 80:80 -p 443:443 maxexcloo/sniproxy
 
   - **ZNC**
 
