@@ -1,7 +1,7 @@
-**Description**  
+**Description**
 This repository contains a collection of Docker configurations I've put together to meet my needs.
 
-**Directory Structure**  
+**Directory Structure**
 Nginx and Nginx + PHP-FPM have a simple directory structure that can be used to simply and easily deploy web applications using a volume binding on /data.
 
     /data
@@ -16,10 +16,10 @@ Nginx and Nginx + PHP-FPM have a simple directory structure that can be used to 
         /secure
             filename.ext // private files such as passwords or keys
 
-**Instructions**  
+**Instructions**
 Instructions will be here when I get around to writing them!
 
-**Usage**  
+**Usage**
 The following commands can be used to deploy some of the services offered by the Docker containers in this repository.
 
 - **Applications**
@@ -31,7 +31,7 @@ The following commands can be used to deploy some of the services offered by the
   - **Koken**
 
           docker run --name="koken-data" maxexcloo/data
-          docker run --name="koken" -it --link mariadb:mariadb --volumes-from="koken-data" -e VIRTUAL_HOST=koken.example.com maxexcloo/koken
+          docker run --name="koken" -it --link mariadb:mariadb --volumes-from="koken-data" -e VIRTUAL_HOST=koken.example.com -h koken.example.com maxexcloo/koken
 
   - **phpMyAdmin**
 
@@ -54,6 +54,29 @@ The following commands can be used to deploy some of the services offered by the
 
           docker run --name="wordpress-data" maxexcloo/data
           docker run --name="wordpress" -it --link mariadb:mariadb --volumes-from="wordpress-data" -e VIRTUAL_HOST=wordpress.example.com maxexcloo/wordpress
+
+  - **Vanilla**
+
+          docker run --name="vanilla-data" maxexcloo/data
+          docker run --name="vanilla" -it --link mariadb:mariadb --volumes-from="vanilla-data" -e VIRTUAL_HOST=vanilla.example.com maxexcloo/vanilla
+
+- **Base**
+
+  - **Arch Linux**
+
+          docker run --name="arch-linux" -it maxexcloo/arch-linux /bin/bash
+
+  - **Data**
+
+          docker run --name="data" -it maxexcloo/data /bin/bash
+
+  - **Debian**
+
+          docker run --name="debian" -it maxexcloo/debian /bin/bash
+
+  - **Ubuntu**
+
+          docker run --name="ubuntu" -it maxexcloo/ubuntu /bin/bash
 
 - **Frameworks**
 
@@ -79,6 +102,11 @@ The following commands can be used to deploy some of the services offered by the
 
 - **Services**
 
+  - **Bukkit**
+
+          docker run --name="bukkit-data" maxexcloo/data
+          docker run --name="bukkit" -it --volumes-from="bukkit-data" -e MEMORY=1024 -p 25565:25565 maxexcloo/bukkit
+
   - **Dnsmasq**
 
           docker run --name="dnsmasq-data" maxexcloo/data
@@ -94,7 +122,7 @@ The following commands can be used to deploy some of the services offered by the
           docker run --name="haproxy-data" maxexcloo/data
           docker run --name="haproxy-config" -it --volumes-from="haproxy-data" -v /var/run/docker.sock:/var/run/docker.sock maxexcloo/haproxy-config
 
-  - **MariaDB** 
+  - **MariaDB**
 
           docker run --name="mariadb-data" maxexcloo/data
           docker run --name="mariadb" -it --volumes-from="mariadb-data" maxexcloo/mariadb
