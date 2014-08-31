@@ -1,4 +1,4 @@
 FROM busybox:latest
 MAINTAINER Max Schaefer <max@excloo.com>
-RUN mkdir -p /data
+RUN mkdir /data
 VOLUME /data
