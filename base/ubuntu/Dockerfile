@@ -1,14 +1,14 @@
 FROM ubuntu:latest
 MAINTAINER Max Schaefer <max@excloo.com>
 ADD etc /etc
+CMD /config/loop
 ENV DEBIAN_FRONTEND noninteractive
+RUN useradd -u 500 core
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y ca-certificates inotify-tools nano pwgen supervisor tmux unzip wget
 RUN apt-get clean
-RUN mkdir -p /config/data /config/init /data /var/log/supervisor
-RUN useradd -u 500 user
-ADD init /config/init/01base
+ADD init /config/init/01ubuntu
 ADD loop /config/loop
 RUN chmod +x /config/loop
-CMD /config/loop
+RUN mkdir -p /config/data /config/init /data /var/log/supervisor

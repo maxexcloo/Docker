@@ -8,7 +8,6 @@ RUN wget "http://archive.ubuntu.com/ubuntu/pool/universe/u/udns/udns_${UDNS_VERS
 RUN tar fxz udns_*.orig.tar.gz; cd udns-*; tar fxz ../udns_*-1.debian.tar.gz; dpkg-buildpackage; cd ..; dpkg -i libudns-dev_*.deb libudns0_*.deb
 RUN tar fxz ${SNIPROXY_VERSION}.tar.gz; cd sniproxy-*; dpkg-buildpackage; dpkg -i ../sniproxy_*.deb
 RUN rm -rf *
-ADD etc /etc
 ADD init /config/init/03sniproxy
 ADD supervisord.conf /etc/supervisor/conf.d/sniproxy.conf
 EXPOSE 80

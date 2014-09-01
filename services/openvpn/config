@@ -1,0 +1,8 @@
+#!/bin/bash
+cd /data
+if [ ! "$(ls -A /data)" ]; then
+	echo "Please run the container at least once in normal mode to generate the configuration files."
+	exit
+fi
+echo "https://$(curl -s http://myip.enix.org/REMOTE_ADDR):8080/"
+socat -d -d EXEC:"cat client.http" OPENSSL-LISTEN:8080,fork,reuseaddr,verify=0,certificate=cert.pem,key=key.pem
