@@ -1,9 +1,11 @@
 FROM maxexcloo/debian:latest
 MAINTAINER Max Schaefer <max@excloo.com>
 RUN apt-get install -y curl iptables openvpn socat
-ADD config /config/config
+ADD config /config
+ADD bin /bin
 ADD init /config/init/03openvpn
 ADD supervisord.conf /etc/supervisor/conf.d/openvpn.conf
+EXPOSE 25
 EXPOSE 110
 EXPOSE 443
 EXPOSE 1194

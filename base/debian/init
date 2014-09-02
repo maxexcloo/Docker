@@ -1,1 +1,1 @@
-chown -R user:user /data
+chown -R core:core /data
