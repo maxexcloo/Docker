@@ -1,0 +1,6 @@
+if [ ! "$(ls -A /data)" ]; then
+	cd /data
+	wget -O - "http://www.sourceforge.net/projects/subsonic/files/subsonic/${VERSION}/subsonic-${VERSION}-standalone.tar.gz/download" | tar -x -z
+	rm -rf *.bat *.html *.sh *.TXT
+	sed -i "s/256/${MEMORY}/g" /etc/supervisor/conf.d/subsonic.conf
+fi
