@@ -46,19 +46,10 @@ The following commands can be used to deploy some of the services offered by the
           docker run --name="tiny-tiny-rss-data" maxexcloo/data
           docker run --name="tiny-tiny-rss" -it --link postgresql:postgresql --volumes-from="tiny-tiny-rss-data" -e VIRTUAL_HOST=tiny-tiny-rss.example.com maxexcloo/tiny-tiny-rss
 
-  - **WebIRC**
-
-          docker run --name="webirc" -it --link znc:znc -e VIRTUAL_HOST=webirc.example.com -e VIRTUAL_PORT=8080 -p 8080:8080 maxexcloo/webirc
-
   - **Wordpress**
 
           docker run --name="wordpress-data" maxexcloo/data
           docker run --name="wordpress" -it --link mariadb:mariadb --volumes-from="wordpress-data" -e VIRTUAL_HOST=wordpress.example.com maxexcloo/wordpress
-
-  - **Vanilla**
-
-          docker run --name="vanilla-data" maxexcloo/data
-          docker run --name="vanilla" -it --link mariadb:mariadb --volumes-from="vanilla-data" -e VIRTUAL_HOST=vanilla.example.com maxexcloo/vanilla
 
 - **Base**
 

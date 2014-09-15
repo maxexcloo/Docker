@@ -1,45 +1,49 @@
 [ -d /dev/net ] || mkdir -p /dev/net
 [ -c /dev/net/tun ] || mknod /dev/net/tun c 10 200
 cd /data
-iptables -t nat -A POSTROUTING -s 192.168.255.0/24 -o eth0 -j MASQUERADE
+IP=$(curl -s http://myip.enix.org/REMOTE_ADDR)
+
 if [ ! "$(ls -A /data)" ]; then
 	openssl dhparam -out dh.pem 2048
-	openssl genrsa -out key.pem 2048
-	openssl req -new -key key.pem -out csr.pem -subj /CN=OpenVPN/
-	openssl x509 -req -in csr.pem -out cert.pem -signkey key.pem -days 3650
-	chmod 600 key.pem
-	IP=$(curl -s http://myip.enix.org/REMOTE_ADDR)
+	openssl genrsa -out openvpn.key 2048
+	openssl req -new -subj /CN=OpenVPN/ -key openvpn.key -out openvpn.csr
+	openssl x509 -req -in openvpn.csr -out openvpn.pem -signkey openvpn.key -days 3650
 fi
+
+chmod 600 openvpn.key
+iptables -t nat -A POSTROUTING -s 192.168.255.0/24 -o eth0 -j MASQUERADE
+
 cat > client.ovpn << EOF
 client
 dev tun
 nobind
 redirect-gateway def1
 <ca>
-$(cat cert.pem)
+$(cat openvpn.pem)
 </ca>
 <cert>
-$(cat cert.pem)
+$(cat openvpn.pem)
 </cert>
 <dh>
 $(cat dh.pem)
 </dh>
 <key>
-$(cat key.pem)
+$(cat openvpn.key)
 </key>
 <connection>
-remote $MY_IP_ADDR 1194 udp
+remote $IP 1194 udp
 </connection>
 <connection>
-remote $MY_IP_ADDR 25 tcp-client
+remote $IP 25 tcp-client
 </connection>
 <connection>
-remote $MY_IP_ADDR 110 tcp-client
+remote $IP 110 tcp-client
 </connection>
 <connection>
-remote $MY_IP_ADDR 443 tcp-client
+remote $IP 443 tcp-client
 </connection>
 EOF
+
 cat > client.http << EOF
 HTTP/1.0 200 OK
 Content-Type: application/x-openvpn-profile
