@@ -85,17 +85,17 @@ The following commands can be used to deploy some of the services offered by the
             docker run --name="apache-data" maxexcloo/data
             docker run --name="apache" -it --volumes-from="apache-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/apache
 
-     - **Apache + PHP**
+    - **Apache + PHP**
 
             docker run --name="apache-php-data" maxexcloo/data
             docker run --name="apache-php" -it --volumes-from="apache-php-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/apache-php
 
-     - **Nginx**
+    - **Nginx**
 
             docker run --name="nginx-data" maxexcloo/data
             docker run --name="nginx" -it --volumes-from="nginx-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx
 
-     - **Nginx + PHP-FPM**
+    - **Nginx + PHP-FPM**
 
             docker run --name="nginx-php-data" maxexcloo/data
             docker run --name="nginx-php" -it --volumes-from="nginx-php-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx-php
