@@ -1,2 +1,2 @@
 mkdir -p /data/dnsmasq /data/iptables
-touch /data/iptables/iptables.rules
+touch /data/iptables/iptables

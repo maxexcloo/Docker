@@ -35,30 +35,30 @@ The following commands can be used to deploy some of the services offered by the
 
     - **Adminer**
 
-            docker run --name="adminer" -d --link mariadb:mariadb --link postgresql:postgresql -e VIRTUAL_HOST=adminer.example.com maxexcloo/adminer
+            docker run --env=[VIRTUAL_HOST=adminer.example.com] --link=[mariadb:mariadb, postgresql:postgresql] --name="adminer" -d maxexcloo/adminer
 
     - **Koken**
 
             docker run --name="koken-data" maxexcloo/data
-            docker run --name="koken" -it --link mariadb:mariadb --volumes-from="koken-data" -e VIRTUAL_HOST=koken.example.com -h koken.example.com maxexcloo/koken
+            docker run --env=[VIRTUAL_HOST=koken.example.com] --link=[mariadb:mariadb] --name="koken" --volumes-from=[koken-data] -it maxexcloo/koken
 
     - **phpMyAdmin**
 
-            docker run --name="phpmyadmin" -d --link mariadb:mariadb -e VIRTUAL_HOST=phpmyadmin.example.com maxexcloo/phpmyadmin
+            docker run --name="phpmyadmin" -d --link mariadb:mariadb --env=VIRTUAL_HOST=phpmyadmin.example.com maxexcloo/phpmyadmin
 
     - **phpPgAdmin**
 
-            docker run --name="phppgadmin" -d --link postgresql:postgresql -e VIRTUAL_HOST=phppgadmin.example.com maxexcloo/phppgadmin
+            docker run --name="phppgadmin" -d --link postgresql:postgresql --env=VIRTUAL_HOST=phppgadmin.example.com maxexcloo/phppgadmin
 
     - **Tiny Tiny RSS**
 
             docker run --name="tiny-tiny-rss-data" maxexcloo/data
-            docker run --name="tiny-tiny-rss" -it --link postgresql:postgresql --volumes-from="tiny-tiny-rss-data" -e VIRTUAL_HOST=tiny-tiny-rss.example.com maxexcloo/tiny-tiny-rss
+            docker run --name="tiny-tiny-rss" -it --link postgresql:postgresql --volumes-from="tiny-tiny-rss-data" --env=VIRTUAL_HOST=tiny-tiny-rss.example.com maxexcloo/tiny-tiny-rss
 
     - **Wordpress**
 
             docker run --name="wordpress-data" maxexcloo/data
-            docker run --name="wordpress" -it --link mariadb:mariadb --volumes-from="wordpress-data" -e VIRTUAL_HOST=wordpress.example.com maxexcloo/wordpress
+            docker run --name="wordpress" -it --link mariadb:mariadb --volumes-from="wordpress-data" --env=VIRTUAL_HOST=wordpress.example.com maxexcloo/wordpress
 
 - **Base**
 
@@ -83,22 +83,22 @@ The following commands can be used to deploy some of the services offered by the
     - **Apache**
 
             docker run --name="apache-data" maxexcloo/data
-            docker run --name="apache" -it --volumes-from="apache-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/apache
+            docker run --name="apache" -it --volumes-from="apache-data" --env=VIRTUAL_HOST=example.com,www.example.com maxexcloo/apache
 
     - **Apache + PHP**
 
             docker run --name="apache-php-data" maxexcloo/data
-            docker run --name="apache-php" -it --volumes-from="apache-php-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/apache-php
+            docker run --name="apache-php" -it --volumes-from="apache-php-data" --env=VIRTUAL_HOST=example.com,www.example.com maxexcloo/apache-php
 
     - **Nginx**
 
             docker run --name="nginx-data" maxexcloo/data
-            docker run --name="nginx" -it --volumes-from="nginx-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx
+            docker run --name="nginx" -it --volumes-from="nginx-data" --env=VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx
 
     - **Nginx + PHP-FPM**
 
             docker run --name="nginx-php-data" maxexcloo/data
-            docker run --name="nginx-php" -it --volumes-from="nginx-php-data" -e VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx-php
+            docker run --name="nginx-php" -it --volumes-from="nginx-php-data" --env=VIRTUAL_HOST=example.com,www.example.com maxexcloo/nginx-php
 
 - **Services**
 
@@ -125,7 +125,7 @@ The following commands can be used to deploy some of the services offered by the
     - **Minecraft**
 
             docker run --name="minecraft-data" maxexcloo/data
-            docker run --name="minecraft" -it --volumes-from="minecraft-data" -e MEMORY=1024 -p 25565:25565 maxexcloo/minecraft
+            docker run --name="minecraft" -it --volumes-from="minecraft-data" --env=MEMORY=1024 -p 25565:25565 maxexcloo/minecraft
 
     - **PostgreSQL**
 
@@ -140,7 +140,7 @@ The following commands can be used to deploy some of the services offered by the
     - **ZNC**
 
             docker run --name="znc-data" maxexcloo/data
-            docker run --name="znc" -it --volumes-from="znc-data" -e VIRTUAL_HOST=znc.example.com -e VIRTUAL_PORT=6667 -p 6697:6697 -p 6667:6667 maxexcloo/znc
+            docker run --name="znc" -it --volumes-from="znc-data" --env=VIRTUAL_HOST=znc.example.com --env=VIRTUAL_PORT=6667 -p 6697:6697 -p 6667:6667 maxexcloo/znc
 
 **Testing**  
     docker run -it --rm=true -p 5050:5050 maxexcloo/couchpotato

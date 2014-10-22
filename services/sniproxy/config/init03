@@ -1,0 +1,2 @@
+mkdir -p /data/sniproxy /data/iptables
+touch /data/sniproxy/sniproxy.conf /data/iptables/iptables

@@ -4,7 +4,7 @@ cd /data
 IP=$(curl -s http://myip.enix.org/REMOTE_ADDR)
 
 if [ ! "$(ls -A /data)" ]; then
-	openssl dhparam -out dh.pem 2048
+	openssl dhparam -out dh.pem
 	openssl genrsa -out openvpn.key 2048
 	openssl req -new -subj /CN=OpenVPN/ -key openvpn.key -out openvpn.csr
 	openssl x509 -req -in openvpn.csr -out openvpn.pem -signkey openvpn.key -days 3650

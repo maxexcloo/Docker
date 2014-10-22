@@ -1,2 +1,0 @@
-chown -R www-data:www-data /data
-chmod 0770 /data/secure

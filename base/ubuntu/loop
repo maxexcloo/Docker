@@ -1,16 +1,5 @@
 #!/bin/bash
-if [ "$(ls -A /config/init)" ]; then
-	for init in /config/init/*; do
-		bash "$init"
-	done
-fi
-if tty -s; then
-	supervisord
-	while true; do
-		echo "Exit supervisorctl with Ctrl-D. Detach with Ctrl-P + Ctrl-Q."
-		supervisorctl
-		echo "Exit shell with Ctrl-D. Detach with Ctrl-P + Ctrl-Q."
-		bash
-	done
-fi
+for init in /config/init*; do
+	bash "$init"
+done
 supervisord -n
