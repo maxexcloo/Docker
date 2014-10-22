@@ -8,7 +8,7 @@ RUN apt-get install -y ca-certificates inotify-tools nano pwgen supervisor unrar
 RUN apt-get clean
 RUN mkdir /config /data
 RUN useradd -u 500 core
-ADD init /config/init01
+ADD config /config
 ADD loop /config/loop
 RUN chmod +x /config/loop
 CMD /config/loop
