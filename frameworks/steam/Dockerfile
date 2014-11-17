@@ -8,9 +8,9 @@ ENV STEAM_CMD_URL http://media.steampowered.com/installer/steamcmd_linux.tar.gz
 ADD config /config
 
 RUN adduser steam --system && \
-	addgroup steam
+    addgroup steam
 
 RUN apt-get update && \
-	apt-get install -y  screen nano curl lib32gcc1 build-essential
+    apt-get install -y lib32gcc1 build-essential
 
 
