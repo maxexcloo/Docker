@@ -1,3 +1,7 @@
+**Note**
+This repository is forked from maxecloo/Docker cause of trouble using nginx-php on Mac OS with boot2docker.
+It contains a fix were the php-fpm.sock file is not stored in the data volumne container, it's now placed into /run directory of the docker container.
+
 **Description**  
 This repository contains a collection of Docker configurations I've put together to meet my needs.
 
