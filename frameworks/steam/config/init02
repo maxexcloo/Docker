@@ -1,0 +1,8 @@
+mkdir /opt/steam -p 
+
+if [ ! "$(ls -A /opt/steam)" ]; then
+	cd /opt/steam
+	wget -O - ${STEAM_CMD_URL} | tar --strip-components=1 -x -z steamcmd
+	chmod +x steamcmd
+	chown steam:steam ./steamcmd
+fi
