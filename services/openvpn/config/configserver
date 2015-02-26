@@ -5,4 +5,4 @@ if [ ! "$(ls -A /data)" ]; then
 	exit
 fi
 echo "https://$(curl -s http://myip.enix.org/REMOTE_ADDR):8080/"
-socat -d -d EXEC:"cat client.http" OPENSSL-LISTEN:8080,fork,reuseaddr,verify=0,certificate=openvpn.pem,key=openvpn.key
+socat EXEC:"cat client.http" OPENSSL-LISTEN:8080,fork,reuseaddr,verify=0,certificate=server.crt,key=server.key

@@ -4,44 +4,35 @@ cd /data
 IP=$(curl -s http://myip.enix.org/REMOTE_ADDR)
 
 if [ ! "$(ls -A /data)" ]; then
-	openssl dhparam -out dh.pem
-	openssl genrsa -out openvpn.key 2048
-	openssl req -new -subj /CN=OpenVPN/ -key openvpn.key -out openvpn.csr
-	openssl x509 -req -in openvpn.csr -out openvpn.pem -signkey openvpn.key -days 3650
+	openssl dhparam -out dh.pem 2048
+	openssl genrsa -out server.key 2048
+	openssl req -new -subj /CN=OpenVPN/ -key server.key -out server.csr
+	openssl x509 -req -in server.csr -out server.crt -signkey server.key -days 3650
 fi
-
-chmod 600 openvpn.key
-iptables -t nat -A POSTROUTING -s 192.168.255.0/24 -o eth0 -j MASQUERADE
+chmod 600 server.key
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 cat > client.ovpn << EOF
 client
 dev tun
-nobind
-redirect-gateway def1
+<connection>
+remote $IP 1194 udp
+</connection>
+<connection>
+remote $IP 443 tcp
+</connection>
 <ca>
-$(cat openvpn.pem)
+$(cat server.crt)
 </ca>
 <cert>
-$(cat openvpn.pem)
+$(cat server.crt)
 </cert>
 <dh>
 $(cat dh.pem)
 </dh>
 <key>
-$(cat openvpn.key)
+$(cat server.key)
 </key>
-<connection>
-remote $IP 1194 udp
-</connection>
-<connection>
-remote $IP 25 tcp-client
-</connection>
-<connection>
-remote $IP 110 tcp-client
-</connection>
-<connection>
-remote $IP 443 tcp-client
-</connection>
 EOF
 
 cat > client.http << EOF

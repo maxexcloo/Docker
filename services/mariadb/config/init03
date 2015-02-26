@@ -8,9 +8,9 @@ if [ ! "$(ls -A /data)" ]; then
 	done
 	mysql -u root -e "FLUSH PRIVILEGES; CREATE USER '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PASS'; GRANT ALL PRIVILEGES ON *.* TO '$MARIADB_USER'@'%' WITH GRANT OPTION;"
 	if [[ $MARIADB_DB != "NONE" ]]; then
-		mysql -u $MARIADB_USER -p$MARIADB_PASS -e "CREATE DATABASE $MARIADB_DB;"
+		mysql -u root -e "CREATE DATABASE $MARIADB_DB;"
 	fi
-	mysqladmin -u $MARIADB_USER -p$MARIADB_PASS shutdown
+	mysqladmin -u root shutdown
 	echo "MariaDB Username: $MARIADB_USER"
 	echo "MariaDB Password: $MARIADB_PASS"
 fi
