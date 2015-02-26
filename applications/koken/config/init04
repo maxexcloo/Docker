@@ -1,6 +1,6 @@
 if [ ! "$(ls -A /data/http)" ]; then
 	cd /data/http
-	wget -O temp.zip "http://install.koken.me/releases/Koken_Installer.zip"
-	unzip -j temp.zip
-	rm temp.zip
+	wget -O koken.zip "http://install.koken.me/releases/Koken_Installer.zip"
+	unzip -j koken.zip
+	rm koken.zip
 fi
