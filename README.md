@@ -1,13 +1,7 @@
-**Description**  
+**Description**
 This repository contains a collection of Docker configurations I've put together to meet my needs.
 
-**Directory Structure**  
-
-- **Apache**
-
-    Apache based frameworks have a simple directory structure that can be used to easily deploy web applications using a volume on /data.
-
-        Apache modules are not yet complete.
+**Directory Structure**
 
 - **Nginx**
 
@@ -16,7 +10,7 @@ This repository contains a collection of Docker configurations I've put together
         /data
             /conf
                 nginx-*.conf // included by nginx
-                php-*.conf // included by php-fpm
+                php-*.conf // included by php5-fpm
             /http
                 index.html // root web directory (index file is index.html or index.php)
             /logs
@@ -25,70 +19,57 @@ This repository contains a collection of Docker configurations I've put together
             /secure
                 filename.ext // private files such as passwords or keys
 
-**Instructions**  
-Instructions will be here when I get around to writing them!
-
-**Usage**  
+**Usage**
 The following commands can be used to deploy some of the services offered by the Docker containers in this repository.
 
 - **Applications**
 
     - **Adminer**
 
-            docker run --env=[VIRTUAL_HOST=adminer.example.com] --link=[mariadb:mariadb, postgresql:postgresql] --name="adminer" -d maxexcloo/adminer
+            docker run --name="adminer" --env=[VIRTUAL_HOST=adminer.example.com] --link=[mariadb:mariadb,postgresql:postgresql] -d maxexcloo/adminer
 
     - **Koken**
 
             docker run --name="koken-data" maxexcloo/data
-            docker run --env=[VIRTUAL_HOST=koken.example.com] --link=[mariadb:mariadb] --name="koken" --volumes-from=[koken-data] -it maxexcloo/koken
+            docker run --name="koken" --env=[VIRTUAL_HOST=koken.example.com] --link=[mariadb:mariadb] --volumes-from=[koken-data] -it maxexcloo/koken
 
     - **phpMyAdmin**
 
-            docker run --name="phpmyadmin" -d --link mariadb:mariadb --env=VIRTUAL_HOST=phpmyadmin.example.com maxexcloo/phpmyadmin
+            docker run --name="phpmyadmin" --env=[VIRTUAL_HOST=phpmyadmin.example.com] --link=[mariadb:mariadb] -d maxexcloo/phpmyadmin
 
     - **phpPgAdmin**
 
-            docker run --name="phppgadmin" -d --link postgresql:postgresql --env=VIRTUAL_HOST=phppgadmin.example.com maxexcloo/phppgadmin
+            docker run --name="phppgadmin" --env=[VIRTUAL_HOST=phppgadmin.example.com] --link=[postgresql:postgresql] -d maxexcloo/phppgadmin
 
     - **Tiny Tiny RSS**
 
             docker run --name="tiny-tiny-rss-data" maxexcloo/data
-            docker run --name="tiny-tiny-rss" -it --link postgresql:postgresql --volumes-from="tiny-tiny-rss-data" --env=VIRTUAL_HOST=tiny-tiny-rss.example.com maxexcloo/tiny-tiny-rss
+            docker run --name="tiny-tiny-rss" --env=[VIRTUAL_HOST=tiny-tiny-rss.example.com] --link=[postgresql:postgresql] --volumes-from=[tiny-tiny-rss-data] -it maxexcloo/tiny-tiny-rss
 
     - **Wordpress**
 
             docker run --name="wordpress-data" maxexcloo/data
-            docker run --name="wordpress" -it --link mariadb:mariadb --volumes-from="wordpress-data" --env=VIRTUAL_HOST=wordpress.example.com maxexcloo/wordpress
+            docker run --name="wordpress" --env=[VIRTUAL_HOST=wordpress.example.com] --link=[mariadb:mariadb] --volumes-from=[wordpress-data] -it maxexcloo/wordpress
 
 - **Base**
 
     - **Arch Linux**
 
-            docker run --name="arch-linux" -it maxexcloo/arch-linux /bin/bash
+            docker run --name="arch-linux" -it maxexcloo/arch-linux
 
     - **Data**
 
-            docker run --name="data" -it maxexcloo/data /bin/sh
+            docker run --name="data" -it maxexcloo/data
 
     - **Debian**
 
-            docker run --name="debian" -it maxexcloo/debian /bin/bash
+            docker run --name="debian" -it maxexcloo/debian
 
     - **Ubuntu**
 
-            docker run --name="ubuntu" -it maxexcloo/ubuntu /bin/bash
+            docker run --name="ubuntu" -it maxexcloo/ubuntu
 
 - **Frameworks**
-
-    - **Apache**
-
-            docker run --name="apache-data" maxexcloo/data
-            docker run --name="apache" -it --volumes-from="apache-data" --env=VIRTUAL_HOST=example.com,www.example.com maxexcloo/apache
-
-    - **Apache + PHP**
-
-            docker run --name="apache-php-data" maxexcloo/data
-            docker run --name="apache-php" -it --volumes-from="apache-php-data" --env=VIRTUAL_HOST=example.com,www.example.com maxexcloo/apache-php
 
     - **Nginx**
 
@@ -111,7 +92,7 @@ The following commands can be used to deploy some of the services offered by the
 
             docker run --name="haproxy-data" maxexcloo/data
             docker run --name="haproxy" -it --volumes-from="haproxy-data" -p 80:80 -p 443:443 maxexcloo/haproxy
-        
+
     - **HAProxy Config**
 
             docker run --name="haproxy-data" maxexcloo/data
@@ -121,7 +102,7 @@ The following commands can be used to deploy some of the services offered by the
 
             docker run --name="mariadb-data" maxexcloo/data
             docker run --name="mariadb" -it --volumes-from="mariadb-data" maxexcloo/mariadb
-        
+
     - **Minecraft**
 
             docker run --name="minecraft-data" maxexcloo/data
@@ -142,7 +123,7 @@ The following commands can be used to deploy some of the services offered by the
             docker run --name="znc-data" maxexcloo/data
             docker run --name="znc" -it --volumes-from="znc-data" --env=VIRTUAL_HOST=znc.example.com --env=VIRTUAL_PORT=6667 -p 6697:6697 -p 6667:6667 maxexcloo/znc
 
-**Testing**  
+**Testing**
     docker run -it --rm=true -p 5050:5050 maxexcloo/couchpotato
     docker run -it --rm=true -p 32400:32400 maxexcloo/plexmediaserver
     docker run -it --rm=true -p 80:80 -p 1900/udp:1900/udp -p 8200:8200 maxexcloo/readymedia
