@@ -3,6 +3,8 @@ MAINTAINER Max Schaefer <max@excloo.com>
 ADD etc /etc
 CMD /bin/bash
 RUN pacman -Syy && \
+	pacman -S --noconfirm pacman && \
+	pacman-db-upgrade && \
 	pacman -Suu --noconfirm && \
 	pacman -S --asdeps --noconfirm $(pacman -Qq) && \
 	pacman -S --asexplicit --noconfirm $(cat /etc/pacman.list) && \
