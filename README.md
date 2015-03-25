@@ -124,9 +124,12 @@ The following commands can be used to deploy some of the services offered by the
             docker run --name="znc" -it --volumes-from="znc-data" --env=VIRTUAL_HOST=znc.example.com --env=VIRTUAL_PORT=6667 -p 6697:6697 -p 6667:6667 maxexcloo/znc
 
 **Testing**
-    docker run -it --rm=true -p 5050:5050 maxexcloo/couchpotato
-    docker run -it --rm=true -p 32400:32400 maxexcloo/plexmediaserver
-    docker run -it --rm=true -p 80:80 -p 1900/udp:1900/udp -p 8200:8200 maxexcloo/readymedia
-    docker run -it --rm=true -p 8080:8080 maxexcloo/sabnzbd
-    docker run -it --rm=true -p 8081:8081 maxexcloo/sickbeard
-    docker run -it --rm=true -p 4040:4040 maxexcloo/subsonic
+
+```
+docker run -it --rm=true -p 5050:5050 maxexcloo/couchpotato
+docker run -it --rm=true -p 32400:32400 maxexcloo/plexmediaserver
+docker run -it --rm=true -p 80:80 -p 1900/udp:1900/udp -p 8200:8200 maxexcloo/readymedia
+docker run -it --rm=true -p 8080:8080 maxexcloo/sabnzbd
+docker run -it --rm=true -p 8081:8081 maxexcloo/sickbeard
+docker run -it --rm=true -p 4040:4040 maxexcloo/subsonic
+```
