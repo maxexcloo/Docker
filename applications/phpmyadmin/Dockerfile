@@ -1,6 +1,6 @@
 FROM maxexcloo/nginx-php:latest
 MAINTAINER Max Schaefer <max@excloo.com>
-ENV VERSION 4.3.10
+ENV VERSION 4.4.2
 RUN mkdir -p /data/http && \
 	cd /data/http && \
 	wget -O - "http://www.sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.gz/download" | tar --strip-components=1 -x -z && \

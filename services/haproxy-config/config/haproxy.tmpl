@@ -21,7 +21,6 @@ defaults
 frontend http
 	bind :80
 	bind :443 ssl no-sslv3 crt /data/cert/
-	rspadd Strict-Transport-Security:\ max-age=15768000
 {{range $host, $containers := groupByMulti $ "Env.VIRTUAL_HOST" ","}}
 	use_backend http_{{$host}} if { hdr(host) -i {{$host}} }
 	use_backend http_{{$host}} if { ssl_fc_sni {{$host}} }
