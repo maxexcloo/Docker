@@ -8,7 +8,7 @@ This repository contains a collection of Docker configurations I've put together
     Nginx based frameworks have a simple directory structure that can be used to easily deploy web applications using a volume on /data.
 
         /data
-            /conf
+            /config
                 nginx-*.conf // included by nginx
                 php-*.conf // included by php5-fpm
             /http
