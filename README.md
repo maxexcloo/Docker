@@ -5,7 +5,7 @@ This repository contains a collection of Docker configurations I've put together
 
 - **Nginx**
 
-    Nginx based frameworks have a simple directory structure that can be used to easily deploy web applications using a volume on /data.
+    Nginx based frameworks have a simple directory structure that can be used to easily deploy web applications using a volume on /data. Try it for yourself. See below for detailed commands.
 
         /data
             /config
