@@ -1,7 +1,0 @@
-if [ ! "$(ls -A /data/http)" ]; then
-	cd /data/http
-	git clone https://www.github.com/gothfox/Tiny-Tiny-RSS.git
-	rm -rf *.md *.pot */*/.empty */.empty .buildpath .gitignore .htaccess .project LICENSE utils
-	cp -R /config/config /data/config
-	cp -R /config/http /data/http
-fi

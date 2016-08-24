@@ -1,0 +1,2 @@
+mkdir -p /data/secure
+chmod 0770 /data/secure

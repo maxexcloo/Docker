@@ -1,3 +1,0 @@
-mkdir -p /data/config /data/http /data/logs /data/secure
-chown -R core:core /data
-chmod 0770 /data/secure

@@ -1,0 +1,6 @@
+#!/bin/bash
+for init in /config/init/*; do
+	bash "$init"
+done
+chown -R core:core /data
+supervisord -n
