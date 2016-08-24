@@ -3,21 +3,22 @@ This repository contains a collection of Docker configurations I've put together
 
 **Directory Structure**
 
-- **Nginx**
+- **nginx**
 
-    Nginx based frameworks have a simple directory structure that can be used to easily deploy web applications using a volume on /data. Try it for yourself. See below for detailed commands.
+    nginx based frameworks have a simple directory structure that can be used to easily deploy web applications using a volume on /app. Try it for yourself. See below for detailed commands.
 
-        /data
+        /app
             /config
                 nginx-*.conf // included by nginx
-                php-*.conf // included by php5-fpm
-            /http
-                index.html // root web directory (index file is index.html or index.php)
+                php-*.conf // included by php-fpm
+            /root
+                ... // root web directory (index file is index.html or index.php)
+        /data
             /logs
                 nginx.log // nginx log file
                 php-fpm.log // php-fpm log file
             /secure
-                filename.ext // private files such as passwords or keys
+                ... // private files such as passwords or keys
 
 **Usage**
 The following commands can be used to deploy some of the services offered by the Docker containers in this repository.
@@ -27,11 +28,6 @@ The following commands can be used to deploy some of the services offered by the
     - **Adminer**
 
             docker run --name="adminer" --env=["VIRTUAL_HOST=adminer.example.com"] --link=[mariadb:mariadb,postgresql:postgresql] -d maxexcloo/adminer
-
-    - **Koken**
-
-            docker run --name="koken-data" maxexcloo/data
-            docker run --name="koken" --env=["VIRTUAL_HOST=koken.example.com"] --link=[mariadb:mariadb] --volumes-from=[koken-data] -i -t maxexcloo/koken
 
     - **phpMyAdmin**
 
@@ -46,37 +42,24 @@ The following commands can be used to deploy some of the services offered by the
             docker run --name="tiny-tiny-rss-data" maxexcloo/data
             docker run --name="tiny-tiny-rss" --env=["VIRTUAL_HOST=tiny-tiny-rss.example.com"] --link=[postgresql:postgresql] --volumes-from=[tiny-tiny-rss-data] -i -t maxexcloo/tiny-tiny-rss
 
-    - **Wordpress**
-
-            docker run --name="wordpress-data" maxexcloo/data
-            docker run --name="wordpress" --env=["VIRTUAL_HOST=wordpress.example.com"] --link=[mariadb:mariadb] --volumes-from=[wordpress-data] -i -t maxexcloo/wordpress
-
 - **Base**
 
     - **Arch Linux**
 
             docker run --name="arch-linux" -i -t maxexcloo/arch-linux
 
-    - **Data**
-
-            docker run --name="data" -i -t maxexcloo/data
-
     - **Debian**
 
             docker run --name="debian" -i -t maxexcloo/debian
 
-    - **Ubuntu**
-
-            docker run --name="ubuntu" -i -t maxexcloo/ubuntu
-
 - **Frameworks**
 
-    - **Nginx**
+    - **nginx**
 
             docker run --name="nginx-data" maxexcloo/data
             docker run --name="nginx" --env=["VIRTUAL_HOST=example.com,www.example.com"] --volumes-from=[nginx-data] -i -t maxexcloo/nginx
 
-    - **Nginx + PHP-FPM**
+    - **nginx + PHP-FPM**
 
             docker run --name="nginx-php-data" maxexcloo/data
             docker run --name="nginx-php" --env=["VIRTUAL_HOST=example.com,www.example.com"] --volumes-from=[nginx-php-data] -i -t maxexcloo/nginx-php
