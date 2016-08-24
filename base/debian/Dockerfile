@@ -8,7 +8,7 @@ RUN apt-get update && \
 	apt-get install -y ca-certificates inotify-tools nano pwgen supervisor unrar unzip wget && \
 	apt-get clean && \
 	echo -n > /var/lib/apt/extended_states
-RUN mkdir /app /config /data /misc
+RUN mkdir /app /config /data
 RUN useradd -u 500 core
 ADD config /config
 RUN chmod +x /config/main

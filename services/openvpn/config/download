@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /data
 if [ ! "$(ls -A /data)" ]; then
-	echo "Please run the container at least once in normal mode to generate the configuration files."
+	echo "Please run container at least once to generate configuration files."
 	exit
 fi
 echo "https://$(curl -s http://myip.enix.org/REMOTE_ADDR):8080/"

@@ -1,6 +1,6 @@
 FROM maxexcloo/debian:latest
 MAINTAINER Max Schaefer <max@excloo.com>
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABF5BD827BD9BF62 && \
+RUN curl http://nginx.org/keys/nginx_signing.key | apt-key add - && \
 	echo "deb http://nginx.org/packages/debian/ jessie nginx" > /etc/apt/sources.list.d/nginx.list && \
 	apt-get update && \
 	apt-get install -y nginx && \

@@ -2,7 +2,6 @@
 [ -c /dev/net/tun ] || mknod /dev/net/tun c 10 200
 cd /data
 IP=$(curl -s http://myip.enix.org/REMOTE_ADDR)
-
 if [ ! "$(ls -A /data)" ]; then
 	openssl dhparam -out dh.pem 2048
 	openssl genrsa -out server.key 2048

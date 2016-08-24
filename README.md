@@ -1,97 +1,101 @@
 **Description**
-This repository contains a collection of Docker configurations I've put together to meet my needs.
+This repository contains a collection of Docker configurations I've put together
+to meet my needs.
 
 **Directory Structure**
 
 - **nginx**
 
-    nginx based frameworks have a simple directory structure that can be used to easily deploy web applications using a volume on /app. Try it for yourself. See below for detailed commands.
+    nginx based frameworks have a simple directory structure that can be used to
+    easily deploy web applications using a volume on /app. Try it for yourself.
+    See below for detailed commands.
 
-        /app
+        /app # application directory, not modified at runtime
             /config
-                nginx-*.conf // included by nginx
-                php-*.conf // included by php-fpm
+                nginx-*.conf # included by nginx
+                php-*.conf # included by php-fpm
             /root
-                ... // root web directory (index file is index.html or index.php)
-        /data
+                ... # root web directory (index is index.html or index.php)
+        /data # data directory, modified at runtime (can be a volume)
             /logs
-                nginx.log // nginx log file
-                php-fpm.log // php-fpm log file
+                nginx.log # nginx log file
+                php-fpm.log # php-fpm log file
             /secure
-                ... // private files such as passwords or keys
+                ... # private files such as passwords or keys
 
 **Usage**
-The following commands can be used to deploy some of the services offered by the Docker containers in this repository.
+The following commands can be used to deploy some of the services offered by the
+Docker containers in this repository.
 
 - **Applications**
 
     - **Adminer**
 
-            docker run --name="adminer" --env=["VIRTUAL_HOST=adminer.example.com"] --link=[mariadb:mariadb,postgresql:postgresql] -d maxexcloo/adminer
+            docker run --name="adminer" -d --env=["VIRTUAL_HOST=adminer.example.com"] --link=[mariadb:mariadb,postgresql:postgresql] maxexcloo/adminer
 
     - **phpMyAdmin**
 
-            docker run --name="phpmyadmin" --env=["VIRTUAL_HOST=phpmyadmin.example.com"] --link=[mariadb:mariadb] -d maxexcloo/phpmyadmin
+            docker run --name="phpmyadmin" -d --env=["VIRTUAL_HOST=phpmyadmin.example.com"] --link=[mariadb:mariadb] maxexcloo/phpmyadmin
 
     - **phpPgAdmin**
 
-            docker run --name="phppgadmin" --env=["VIRTUAL_HOST=phppgadmin.example.com"] --link=[postgresql:postgresql] -d maxexcloo/phppgadmin
+            docker run --name="phppgadmin" -d --env=["VIRTUAL_HOST=phppgadmin.example.com"] --link=[postgresql:postgresql] maxexcloo/phppgadmin
 
     - **Tiny Tiny RSS**
 
-            docker run --name="tiny-tiny-rss-data" maxexcloo/data
-            docker run --name="tiny-tiny-rss" --env=["VIRTUAL_HOST=tiny-tiny-rss.example.com"] --link=[postgresql:postgresql] --volumes-from=[tiny-tiny-rss-data] -i -t maxexcloo/tiny-tiny-rss
+            docker volume create --name="tiny-tiny-rss"
+            docker run --name="tiny-tiny-rss" -it --env=["VIRTUAL_HOST=tiny-tiny-rss.example.com"] --link=[postgresql:postgresql] --volume=[tiny-tiny-rss:/data] maxexcloo/tiny-tiny-rss
 
 - **Base**
 
     - **Arch Linux**
 
-            docker run --name="arch-linux" -i -t maxexcloo/arch-linux
+            docker run --name="arch-linux" -it maxexcloo/arch-linux
 
     - **Debian**
 
-            docker run --name="debian" -i -t maxexcloo/debian
+            docker run --name="debian" -it maxexcloo/debian
 
 - **Frameworks**
 
     - **nginx**
 
-            docker run --name="nginx-data" maxexcloo/data
-            docker run --name="nginx" --env=["VIRTUAL_HOST=example.com,www.example.com"] --volumes-from=[nginx-data] -i -t maxexcloo/nginx
+            docker volume create --name="nginx"
+            docker run --name="nginx" -it --env=["VIRTUAL_HOST=example.com,www.example.com"] --volume=[nginx:/data] maxexcloo/nginx
 
     - **nginx + PHP-FPM**
 
-            docker run --name="nginx-php-data" maxexcloo/data
-            docker run --name="nginx-php" --env=["VIRTUAL_HOST=example.com,www.example.com"] --volumes-from=[nginx-php-data] -i -t maxexcloo/nginx-php
+            docker volume create --name="nginx-php"
+            docker run --name="nginx-php" -it --env=["VIRTUAL_HOST=example.com,www.example.com"] --volume=[nginx-php:/data] maxexcloo/nginx-php
 
 - **Services**
 
     - **HAProxy**
 
-            docker run --name="haproxy-data" maxexcloo/data
-            docker run --name="haproxy" --publish=[80:80,443:443] --volumes-from=[haproxy-data] -i -t maxexcloo/haproxy
+            docker volume create --name="haproxy"
+            docker run --name="haproxy" -it --publish=[80:80,443:443] --volume=[haproxy:/data] maxexcloo/haproxy
 
     - **HAProxy Config**
 
-            docker run --name="haproxy-data" maxexcloo/data
-            docker run --name="haproxy-config" --volume=[/var/run/docker.sock:/var/run/docker.sock] --volumes-from=[haproxy-data] -i -t maxexcloo/haproxy-config
+            docker volume create --name="haproxy"
+            docker run --name="haproxy-config" -it --volume=[/var/run/docker.sock:/var/run/docker.sock] --volume=[haproxy:/data] maxexcloo/haproxy-config
 
     - **MariaDB**
 
-            docker run --name="mariadb-data" maxexcloo/data
-            docker run --name="mariadb" --volumes-from=[mariadb-data] -i -t maxexcloo/mariadb
+            docker volume create --name="mariadb"
+            docker run --name="mariadb" -it --volume=[mariadb:/data] maxexcloo/mariadb
 
     - **Minecraft**
 
-            docker run --name="minecraft-data" maxexcloo/data
-            docker run --name="minecraft" --env=["MEMORY=1024"] --publish=[25565:25565] --volumes-from=[minecraft-data] -i -t maxexcloo/minecraft
+            docker volume create --name="minecraft"
+            docker run --name="minecraft" -it --env=["MEMORY=1024"] --publish=[25565:25565] --volume=[minecraft:/data] maxexcloo/minecraft
 
     - **PostgreSQL**
 
-            docker run --name="postgresql-data" maxexcloo/data
-            docker run --name="postgresql" --volumes-from=[postgresql-data] -i -t maxexcloo/postgresql
+            docker volume create --name="postgresql"
+            docker run --name="postgresql" -it --volume=[postgresql:/data] maxexcloo/postgresql
 
     - **ZNC**
 
-            docker run --name="znc-data" maxexcloo/data
-            docker run --name="znc" --env=["VIRTUAL_HOST=znc.example.com","VIRTUAL_PORT=6667"] --publish=[6667:6667,6697:6697] --volumes-from=[znc-data] -i -t maxexcloo/znc
+            docker volume create --name="znc"
+            docker run --name="znc" -it --env=["VIRTUAL_HOST=znc.example.com","VIRTUAL_PORT=6667"] --publish=[6667:6667,6697:6697] --volume=[znc:/data] maxexcloo/znc
