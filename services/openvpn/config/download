@@ -1,8 +1,0 @@
-#!/bin/bash
-cd /data
-if [ ! "$(ls -A /data)" ]; then
-	echo "Please run container at least once to generate configuration files."
-	exit
-fi
-echo "https://$(curl -s http://myip.enix.org/REMOTE_ADDR):8080/"
-socat EXEC:"cat client.http" OPENSSL-LISTEN:8080,fork,reuseaddr,verify=0,certificate=server.crt,key=server.key
