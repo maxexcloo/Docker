@@ -1,7 +1,7 @@
 FROM maxexcloo/ruby:latest
 MAINTAINER Max Schaefer <max@excloo.com>
 VERSION=2.3.1
-RUN apt-get install rbenv && \
+RUN apt-get install -y rbenv ruby-build && \
 	apt-get clean && \
 	echo -n > /var/lib/apt/extended_states
 RUN rbenv install ${VERSION} && \
