@@ -1,1 +1,2 @@
-mkdir -p 
+cp -r /app/{*.local,cache,feed-icons,lock} /data
+ln -fs /data/* /app

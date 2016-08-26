@@ -10,7 +10,7 @@ if [ ! "$(ls -A /data)" ]; then
 fi
 chmod 600 server.key
 cd /config
-ln -s /data/* .
+ln -fs /data/* .
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 cat > client.ovpn << EOF
