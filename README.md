@@ -3,25 +3,22 @@ This repository contains a collection of Docker configurations I've put together
 to meet my needs.
 
 **Directory Structure**
+All frameworks have a simple directory structure that can be used to easily
+deploy web applications. Try it for yourself. See below for an example (all
+applications & services follow this basic structure).
 
-- **nginx**
-
-    nginx based frameworks have a simple directory structure that can be used to
-    easily deploy web applications using a volume on /app. Try it for yourself.
-    See below for detailed commands.
-
-        /app # application directory, not modified at runtime
-            /config
-                nginx-*.conf # included by nginx
-                php-*.conf # included by php-fpm
-            /root
-                ... # root web directory (index is index.html or index.php)
-        /data # data directory, modified at runtime (can be a volume)
-            /logs
-                nginx.log # nginx log file
-                php-fpm.log # php-fpm log file
-            /secure
-                ... # private files such as passwords or keys
+    /app - application directory (web root, etc), not modified at runtime
+        index.html - example application
+    /config - configuration directory, not modified at runtime
+        /init - init file directory, not modified at runtime
+            application - executed at startup of application
+        fastcgi-*.conf - included by nginx
+        nginx-*.conf - included by nginx
+        php-*.conf - included by php-fpm
+    /data - data directory, modified at runtime (can be a volume)
+        /logs
+            nginx.log # nginx log file
+            php-fpm.log # php-fpm log file
 
 **Usage**
 The following commands can be used to deploy some of the services offered by the
@@ -56,6 +53,10 @@ Docker containers in this repository.
 
             docker run --name="debian" -it maxexcloo/debian
 
+    - **Ubuntu**
+
+            docker run --name="ubuntu" -it maxexcloo/ubuntu
+
 - **Frameworks**
 
     - **nginx**
@@ -67,6 +68,11 @@ Docker containers in this repository.
 
             docker volume create --name="nginx-php"
             docker run --name="nginx-php" -it --env=["VIRTUAL_HOST=example.com,www.example.com"] --volume=[nginx-php:/data] maxexcloo/nginx-php
+
+    - **nginx + Phusion Passenger**
+
+            docker volume create --name="nginx-passenger"
+            docker run --name="nginx-passenger" -it --env=["VIRTUAL_HOST=example.com,www.example.com"] --volume=[nginx-passenger:/data] maxexcloo/nginx-passenger
 
 - **Services**
 
