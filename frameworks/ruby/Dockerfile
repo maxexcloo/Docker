@@ -1,11 +1,7 @@
 FROM maxexcloo/debian:latest
 MAINTAINER Max Schaefer <max@excloo.com>
 VERSION 2.3.1
-RUN apt-get install -y apt-transport-https rbenv ruby-build && \
-	apt-key adv --keyserver hkp://keyserver.ubuntu.com/ --recv-keys 561F9B9CAC40B2F7 && \
-	echo "deb https://oss-binaries.phusionpassenger.com/apt/passenger/ jessie main" > /etc/apt/sources.list.d/passenger.list && \
-	apt-get update && \
-	apt-get install -y nginx-extras passenger && \
+RUN apt-get install -y rbenv ruby-build && \
 	apt-get clean && \
 	echo -n > /var/lib/apt/extended_states
 RUN git clone https://github.com/rbenv/rbenv.git /opt/rbenv && \
@@ -20,9 +16,3 @@ RUN git clone https://github.com/rbenv/rbenv.git /opt/rbenv && \
 	source ~/.bash_profile
 RUN rbenv install ${VERSION} && \
 	rbenv global ${VERSION}
-RUN gem install passenger rails
-RUN rm -rf /etc/nginx/*.d /etc/nginx/sites-* && \
-	mkdir -p /etc/nginx/addon.d /etc/nginx/config.d /etc/nginx/host.d /etc/nginx/nginx.d
-ADD etc /etc
-ADD supervisord.conf /etc/supervisor/conf.d/nginx.conf
-EXPOSE 80

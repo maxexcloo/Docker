@@ -2,5 +2,5 @@
 for init in /config/init/*; do
 	bash "$init"
 done
-chown -R core:core /data
+chown -R core:core /{app,config,data}
 supervisord -n
