@@ -13,17 +13,16 @@ RUN git clone https://github.com/rbenv/rbenv.git /opt/rbenv && \
 	cd /opt/rbenv && \
 	src/configure && \
 	make -C src && \
+	cd ~ && \
 	echo 'export PATH="/opt/rbenv/bin:$PATH"' | tee ~/.bash_profile ~/.bashrc && \
 	echo 'export RBENV_ROOT="/opt/rbenv"' | tee -a ~/.bash_profile ~/.bashrc && \
 	echo 'eval "$(rbenv init -)"' | tee -a ~/.bash_profile ~/.bashrc && \
 	source ~/.bash_profile
 RUN rbenv install ${VERSION} && \
-	rbenv global ${VERSION} && \
-	gem install passenger rails
-RUN rm -rf /etc/nginx/*.d && \
+	rbenv global ${VERSION}
+RUN gem install passenger rails
+RUN rm -rf /etc/nginx/*.d /etc/nginx/sites-* && \
 	mkdir -p /etc/nginx/addon.d /etc/nginx/config.d /etc/nginx/host.d /etc/nginx/nginx.d
-
-
 ADD etc /etc
 ADD supervisord.conf /etc/supervisor/conf.d/nginx.conf
 EXPOSE 80
