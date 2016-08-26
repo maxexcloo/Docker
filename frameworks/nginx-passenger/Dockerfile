@@ -1,6 +1,6 @@
 FROM maxexcloo/debian:latest
 MAINTAINER Max Schaefer <max@excloo.com>
-VERSION 2.3.1
+ENV VERSION 2.3.1
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com/ --recv-keys 561F9B9CAC40B2F7 && \
 	echo "deb https://oss-binaries.phusionpassenger.com/apt/passenger/ jessie main" > /etc/apt/sources.list.d/passenger.list && \
 	apt-get update && \
