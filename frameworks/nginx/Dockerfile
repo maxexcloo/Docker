@@ -7,7 +7,7 @@ RUN curl http://nginx.org/keys/nginx_signing.key | apt-key add - && \
 	apt-get clean && \
 	echo -n > /var/lib/apt/extended_states
 RUN rm -rf /etc/nginx/*.d && \
-	mkdir -p /app/config /app/root /etc/nginx/addon.d /etc/nginx/config.d /etc/nginx/host.d /etc/nginx/nginx.d
+	mkdir -p /etc/nginx/addon.d /etc/nginx/config.d /etc/nginx/host.d /etc/nginx/nginx.d
 ADD etc /etc
 ADD supervisord.conf /etc/supervisor/conf.d/nginx.conf
 EXPOSE 80

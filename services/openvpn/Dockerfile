@@ -1,6 +1,6 @@
 FROM maxexcloo/debian:latest
 MAINTAINER Max Schaefer <max@excloo.com>
-RUN apt-get install -y curl iptables openvpn socat && \
+RUN apt-get install -y iptables openvpn socat && \
 	apt-get clean && \
 	echo -n > /var/lib/apt/extended_states
 ADD app /app

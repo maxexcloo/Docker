@@ -9,6 +9,8 @@ if [ ! "$(ls -A /data)" ]; then
 	openssl x509 -req -in server.csr -out server.crt -signkey server.key -days 3650
 fi
 chmod 600 server.key
+cd /config
+ln -s /data/* .
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 cat > client.ovpn << EOF
