@@ -17,8 +17,8 @@ WORKDIR /
 ENV PATH ${RBENV_ROOT}/bin:${PATH}
 RUN rbenv install ${VERSION} && \
 	rbenv global ${VERSION}
-RUN rm -rf /etc/nginx/{*.d,sites-*} && \
-	mkdir -p /etc/nginx/{addon.d,config.d,host.d,nginx.d}
+RUN rm -rf /etc/nginx/*.d /etc/nginx/sites-* && \
+	mkdir -p /etc/nginx/addon.d /etc/nginx/config.d /etc/nginx/host.d /etc/nginx/nginx.d
 ADD etc /etc
 ADD supervisord.conf /etc/supervisor/conf.d/nginx.conf
 EXPOSE 80
