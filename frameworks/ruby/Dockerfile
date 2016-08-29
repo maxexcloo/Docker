@@ -13,6 +13,6 @@ RUN git clone https://github.com/rbenv/rbenv.git /opt/rbenv && \
 	echo 'export PATH="/opt/rbenv/bin:$PATH"' | tee ~/.bash_profile ~/.bashrc && \
 	echo 'export RBENV_ROOT="/opt/rbenv"' | tee -a ~/.bash_profile ~/.bashrc && \
 	echo 'eval "$(rbenv init -)"' | tee -a ~/.bash_profile ~/.bashrc && \
-	source ~/.bash_profile
+	. ~/.bash_profile
 RUN rbenv install ${VERSION} && \
 	rbenv global ${VERSION}
