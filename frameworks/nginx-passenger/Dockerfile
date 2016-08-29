@@ -9,11 +9,11 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com/ --recv-keys 561F9B9CAC40
 	echo -n > /var/lib/apt/extended_states
 RUN git clone https://github.com/rbenv/rbenv.git /opt/rbenv && \
 	git clone https://github.com/rbenv/ruby-build.git /opt/rbenv/plugins/ruby-build && \
-	cd /opt/rbenv && \
-	src/configure && \
-	make -C src && \
-	cd ~ && \
-	echo 'export PATH="/opt/rbenv/bin:$PATH"' | tee ~/.bash_profile ~/.bashrc && \
+WORKDIR /opt/rbenv
+RUN src/configure && \
+	make -C src
+WORKDIR /
+RUN echo 'export PATH="/opt/rbenv/bin:$PATH"' | tee ~/.bash_profile ~/.bashrc && \
 	echo 'export RBENV_ROOT="/opt/rbenv"' | tee -a ~/.bash_profile ~/.bashrc && \
 	echo 'eval "$(rbenv init -)"' | tee -a ~/.bash_profile ~/.bashrc && \
 	. ~/.bash_profile
