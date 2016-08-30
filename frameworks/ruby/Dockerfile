@@ -14,6 +14,4 @@ WORKDIR /
 ENV PATH ${RBENV_ROOT}/bin:${PATH}
 RUN rbenv install ${VERSION} && \
 	rbenv global ${VERSION}
-RUN echo 'eval "$(rbenv init -)"' > /etc/profile.d/rbenv.sh && \
-	chmod +x /etc/profile.d/rbenv.sh && \
-	/etc/profile.d/rbenv.sh
+ENV PATH ${RBENV_ROOT}/shims:${PATH}
