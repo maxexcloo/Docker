@@ -1,0 +1,9 @@
+if [ ! "$(ls -A /data)" ]; then
+	su core -c "/usr/lib/postgresql/9.4/bin/initdb -D /data"
+	su core -c "/usr/lib/postgresql/9.4/bin/postgres --config-file=/etc/postgresql/9.4/main/postgresql.conf" &
+	while [ ! -e /run/postgresql/9.4-main.pid ]; do
+		inotifywait -e create -q /run/postgresql/
+	done
+	su core -c "/usr/lib/postgresql/9.4/bin/psql -c \"CREATE USER $POSTGRESQL_USER WITH SUPERUSER PASSWORD '$POSTGRESQL_PASS';\""
+	su core -c "/usr/lib/postgresql/9.4/bin/pg_ctl -D /data stop"
+fi

@@ -1,16 +1,9 @@
-MARIADB_PASS=${MARIADB_PASS:-"$(pwgen -B -s 24 1)"}
-chown -R mysql:mysql /data
 if [ ! "$(ls -A /data)" ]; then
-	mysql_install_db --datadir=/data --user=mysql
+	mysql_install_db --datadir=/data --user=core
 	mysqld_safe --skip-grant-tables &
 	while [ ! -e /run/mysqld/mysqld.sock ]; do
 		inotifywait -e create -q /run/mysqld/
 	done
 	mysql -u root -e "FLUSH PRIVILEGES; CREATE USER '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PASS'; GRANT ALL PRIVILEGES ON *.* TO '$MARIADB_USER'@'%' WITH GRANT OPTION;"
-	if [[ $MARIADB_DB != "NONE" ]]; then
-		mysql -u root -e "CREATE DATABASE $MARIADB_DB;"
-	fi
 	mysqladmin -u root shutdown
-	echo "MariaDB Username: $MARIADB_USER"
-	echo "MariaDB Password: $MARIADB_PASS"
 fi

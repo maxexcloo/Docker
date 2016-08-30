@@ -1,6 +1,7 @@
 #!/bin/bash
+bash /config/prep
 for init in /config/init/*; do
 	bash "$init"
 done
-chown -R core:core /app /config /data
+bash /config/prep
 supervisord -n
