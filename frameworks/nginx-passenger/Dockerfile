@@ -5,7 +5,7 @@ RUN curl https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - &&
 	echo "deb https://deb.nodesource.com/node_6.x/ xenial main" > /etc/apt/sources.list.d/node.list && \
 	echo "deb https://oss-binaries.phusionpassenger.com/apt/passenger/ xenial main" > /etc/apt/sources.list.d/passenger.list && \
 	apt-get update && \
-	apt-get install -y build-essential nginx-extras nodejs passenger ruby && \
+	apt-get install -y build-essential nginx-extras nodejs passenger ruby ruby-dev && \
 	apt-get clean && \
 	echo -n > /var/lib/apt/extended_states
 RUN gem install rails
