@@ -89,7 +89,7 @@ Docker containers in this repository.
     - **MariaDB**
 
             docker volume create --name="mariadb"
-            docker run --name="mariadb" -it --volume mariadb:/data maxexcloo/mariadb
+            docker run --name="mariadb" -it --env "MARIADB_USER=docker" --env "MARIADB_PASS=docker" --volume mariadb:/data maxexcloo/mariadb
 
     - **Minecraft**
 
@@ -104,4 +104,4 @@ Docker containers in this repository.
     - **ZNC**
 
             docker volume create --name="znc"
-            docker run --name="znc" -it --env "VIRTUAL_HOST=znc.example.com" --env "VIRTUAL_PORT=6667" --publish 6667:6667 --publish 6697:6697 --volume znc:/data maxexcloo/znc
+            docker run --name="znc" -it --env "VIRTUAL_HOST=znc.example.com" --env "VIRTUAL_PORT=6667" --publish 6667:6667 --volume znc:/data maxexcloo/znc

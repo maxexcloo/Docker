@@ -5,4 +5,3 @@ RUN apt-get install -y znc && \
 	echo -n > /var/lib/apt/extended_states
 ADD supervisord.conf /etc/supervisor/conf.d/znc.conf
 EXPOSE 6667
-EXPOSE 6697

@@ -1,5 +1,7 @@
 FROM maxexcloo/debian:latest
 MAINTAINER Max Schaefer <max@excloo.com>
+ENV POSTGRESQL_USER docker
+ENV POSTGRESQL_PASS docker
 RUN curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
 	echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" > /etc/apt/sources.list.d/postgresql.list && \
 	apt-get update && \
