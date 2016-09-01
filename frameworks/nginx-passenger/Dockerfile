@@ -3,7 +3,7 @@ MAINTAINER Max Schaefer <max@excloo.com>
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7 && \
 	echo "deb https://oss-binaries.phusionpassenger.com/apt/passenger/ xenial main" > /etc/apt/sources.list.d/passenger.list && \
 	apt-get update && \
-	apt-get install -y build-essential nginx-extras nodejs passenger ruby ruby-dev && \
+	apt-get install -y build-essential liblzma-dev nginx-extras nodejs passenger ruby ruby-dev zlib1g-dev && \
 	apt-get clean && \
 	echo -n > /var/lib/apt/extended_states
 RUN gem install rails
