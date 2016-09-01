@@ -1,8 +1,6 @@
 FROM maxexcloo/ubuntu:latest
 MAINTAINER Max Schaefer <max@excloo.com>
-RUN curl https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7 && \
-	echo "deb https://deb.nodesource.com/node_6.x/ xenial main" > /etc/apt/sources.list.d/node.list && \
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7 && \
 	echo "deb https://oss-binaries.phusionpassenger.com/apt/passenger/ xenial main" > /etc/apt/sources.list.d/passenger.list && \
 	apt-get update && \
 	apt-get install -y build-essential nginx-extras nodejs passenger ruby ruby-dev && \
