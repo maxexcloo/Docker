@@ -20,4 +20,3 @@ ADD config /config
 ADD supervisord.conf /etc/supervisor/conf.d/easyengine.conf
 EXPOSE 80
 EXPOSE 443
-EXPOSE 22222
