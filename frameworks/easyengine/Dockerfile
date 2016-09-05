@@ -1,8 +1,8 @@
 FROM maxexcloo/debian:latest
 MAINTAINER Max Schaefer <max@excloo.com>
 ENV TERM xterm
-RUN git config —global user.email "mail@example.com" && \
-	git config —global user.name "Default User" && \
+RUN git config --global user.email "mail@example.com" && \
+	git config --global user.name "Default User" && \
 	apt-get update && \
 	curl https://raw.githubusercontent.com/EasyEngine/easyengine/master/install | bash && \
 	apt-get clean && \
