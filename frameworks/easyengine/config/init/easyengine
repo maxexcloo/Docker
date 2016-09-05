@@ -1,0 +1,2 @@
+chown -R mysql:mysql /var/lib/mysql
+chown -R www-data:www-data /var/www

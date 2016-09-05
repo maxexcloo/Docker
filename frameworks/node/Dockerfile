@@ -5,4 +5,5 @@ RUN curl https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - &&
 	apt-get update && \
 	apt-get install -y build-essential nodejs && \
 	apt-get clean && \
-	echo -n > /var/lib/apt/extended_states
+	echo -n > /var/lib/apt/extended_states && \
+	rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*

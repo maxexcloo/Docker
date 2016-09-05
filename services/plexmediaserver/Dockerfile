@@ -5,10 +5,10 @@ RUN curl http://shell.ninthgate.se/packages/shell.ninthgate.se.gpg.key | apt-key
 	apt-get update && \
 	apt-get install -y plexmediaserver && \
 	apt-get clean && \
-	echo -n > /var/lib/apt/extended_states
+	echo -n > /var/lib/apt/extended_states && \
+	rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 RUN mkdir -p /var/run/dbus && \
 	chown messagebus:messagebus /var/run/dbus && \
 	dbus-uuidgen --ensure
-ADD etc /etc
 ADD supervisord.conf /etc/supervisor/conf.d/plexmediaserver.conf
 EXPOSE 32400

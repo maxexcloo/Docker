@@ -5,7 +5,8 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7 &&
 	apt-get update && \
 	apt-get install -y build-essential libsqlite3-dev nginx-extras nodejs passenger ruby ruby-dev zlib1g-dev && \
 	apt-get clean && \
-	echo -n > /var/lib/apt/extended_states
+	echo -n > /var/lib/apt/extended_states && \
+	rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 RUN gem install rails
 RUN rm -rf /etc/nginx/*.d /etc/nginx/sites-* && \
 	mkdir -p /etc/nginx/addon.d /etc/nginx/config.d /etc/nginx/host.d /etc/nginx/nginx.d

@@ -1,0 +1,1 @@
+sed -i "s/mail@example.com/${EMAIL}/g" /etc/supervisor/conf.d/certbot.conf

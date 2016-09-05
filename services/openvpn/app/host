@@ -1,0 +1,8 @@
+#!/bin/bash
+cd /data
+if [ ! "$(ls -A /data)" ]; then
+	echo "Please run container at least once to generate configuration files."
+	exit
+fi
+echo "http://${VIRTUAL_HOST}/"
+cat client.http | nc -l 80
