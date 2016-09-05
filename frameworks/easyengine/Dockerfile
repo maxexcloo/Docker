@@ -3,9 +3,7 @@ MAINTAINER Max Schaefer <max@excloo.com>
 ENV TERM xterm
 RUN git config --global user.email "mail@example.com" && \
 	git config --global user.name "Default User" && \
-	apt-get update && \
 	curl https://raw.githubusercontent.com/EasyEngine/easyengine/master/install | bash && \
-	ee stack install --hhvm && \
 	ee stack install --mysql && \
 	ee stack install --nginx && \
 	ee stack install --php7 && \
