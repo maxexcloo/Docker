@@ -8,10 +8,8 @@ RUN git config --global user.email "mail@example.com" && \
 	ee stack install --hhvm && \
 	ee stack install --mysql && \
 	ee stack install --nginx && \
-	ee stack install --php && \
 	ee stack install --php7 && \
 	ee stack install --postfix && \
-	ee stack install --web && \
 	ee stack start && \
 	apt-get clean && \
 	echo -n > /var/lib/apt/extended_states && \
