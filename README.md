@@ -59,7 +59,7 @@ Docker containers in this repository.
     - **EasyEngine**
 
             docker run --name="easyengine" -it -p 80:80 -p 443:443 maxexcloo/easyengine
-            docker exec easyengine bash
+            docker exec -it easyengine bash
 
     - **Java**
 
