@@ -30,18 +30,9 @@ Docker containers in this repository.
 
             docker run --name="adminer" -d -e "VIRTUAL_HOST=adminer.example.com" --link mariadb:mariadb --link postgresql:postgresql maxexcloo/adminer
 
-    - **Koken**
-
-            docker volume create --name="koken"
-            docker run --name="koken" -it -e "VIRTUAL_HOST=koken.example.com" --link mariadb:mariadb -v koken:/data maxexcloo/koken
-
     - **phpMyAdmin**
 
             docker run --name="phpmyadmin" -d -e "VIRTUAL_HOST=phpmyadmin.example.com" --link mariadb:mariadb maxexcloo/phpmyadmin
-
-    - **phpPgAdmin**
-
-            docker run --name="phppgadmin" -d -e "VIRTUAL_HOST=phppgadmin.example.com" --link postgresql:postgresql maxexcloo/phppgadmin
 
     - **Tiny Tiny RSS**
 
