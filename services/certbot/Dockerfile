@@ -8,4 +8,5 @@ RUN echo "deb http://http.debian.net/debian/ jessie-backports main" > /etc/apt/s
 	rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 ADD config /config
 ADD supervisord.conf /etc/supervisor/conf.d/certbot.conf
+EXPOSE 80
 EXPOSE 443
