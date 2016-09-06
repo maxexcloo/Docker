@@ -100,10 +100,6 @@ Docker containers in this repository.
 
             docker run --name="node" -it maxexcloo/node bash
 
-    - **Ruby**
-
-            docker run --name="ruby" -it maxexcloo/ruby bash
-
 - **Services**
 
     - **Certbot**
