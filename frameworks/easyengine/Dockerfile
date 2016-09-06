@@ -6,7 +6,7 @@ RUN git config --global user.email "mail@example.com" && \
 	curl https://raw.githubusercontent.com/EasyEngine/easyengine/master/install | bash && \
 	ee stack install --mysql && \
 	ee stack install --nginx && \
-	ee stack install --php7 && \
+	ee stack install --php && \
 	ee stack install --postfix && \
 	ee stack start && \
 	apt-get clean && \
