@@ -71,9 +71,7 @@ Docker containers in this repository.
 
     - **EasyEngine**
 
-            docker volume create --name="easyengine-mysql"
-            docker volume create --name="easyengine-www"
-            docker run --name="easyengine" -it -p 80:80 -p 443:443 -v easyengine-mysql:/var/lib/mysql -v easyengine-www:/var/www maxexcloo/easyengine
+            docker run --name="easyengine" -it -p 80:80 -p 443:443 maxexcloo/easyengine
             docker exec easyengine bash
 
     - **Java**
