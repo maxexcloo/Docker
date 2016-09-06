@@ -46,10 +46,6 @@ Docker containers in this repository.
 
 - **Base**
 
-    - **Arch Linux**
-
-            docker run --name="arch-linux" -it maxexcloo/arch-linux bash
-
     - **Debian**
 
             docker run --name="debian" -it maxexcloo/debian bash
