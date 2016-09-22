@@ -11,6 +11,7 @@ RUN apt-get update && \
 RUN mkdir /app /config /data
 RUN useradd -u 500 core
 ADD config /config
-RUN chmod +x /config/main
+RUN wget -O /config/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.1.3/dumb-init_1.1.3_amd64
+RUN chmod +x /config/dumb-init /config/main
+ENTRYPOINT /config/dumb-init --
 CMD /config/main
-WORKDIR /

@@ -4,4 +4,4 @@ for init in /config/init/*; do
 	bash "$init"
 done
 bash /config/prep
-supervisord -n
+exec supervisord -n
