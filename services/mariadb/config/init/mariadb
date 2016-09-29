@@ -1,9 +1,16 @@
-if [ ! "$(ls -A /data)" ]; then
+if [ ! "$(ls -A /data/aria_log_control)" ]; then
+	mkdir -p /data/log
+	chown -R core:core /data/log
 	mysql_install_db --datadir=/data --user=core
 	mysqld_safe --skip-grant-tables &
 	while [ ! -e /run/mysqld/mysqld.sock ]; do
 		inotifywait -e create -q /run/mysqld/
 	done
-	mysql -u root -e "FLUSH PRIVILEGES; CREATE USER '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PASS'; GRANT ALL PRIVILEGES ON *.* TO '$MARIADB_USER'@'%' WITH GRANT OPTION;"
+	mysql -u root -e "FLUSH PRIVILEGES; CREATE USER '${MARIADB_USER}'@'%' IDENTIFIED BY '${MARIADB_PASS}'; GRANT ALL PRIVILEGES ON *.* TO '${MARIADB_USER}'@'%' WITH GRANT OPTION;"
+	mysql -u root -e "CREATE DATABASE IF NOT EXISTS ${MARIADB_USER};"
 	mysqladmin -u root shutdown
 fi
+
+# Make socket writable for core
+chown -R core:root /run/mysqld
+chown -R core:core /data/log
