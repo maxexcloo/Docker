@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:resolute
 MAINTAINER Max Schaefer <max@excloo.com>
 ADD etc /etc
 ENV DEBIAN_FRONTEND noninteractive
